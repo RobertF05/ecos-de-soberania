@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 🇳🇮 Ecos de Soberanía: Digitalizando la Memoria y la Identidad Nacional de Nicaragua
 
 Plataforma educativa y museo digital interactivo diseñado para ejecutarse de forma **100% autónoma y offline** (red local LAN) en una laptop durante una feria universitaria, permitiendo además que los visitantes interactúen desde sus propios teléfonos móviles mediante un código QR sin consumir internet.
@@ -60,3 +61,7 @@ Cuando tengas las fotos reales, simplemente colócalas en la carpeta:
 frontend/public/assets/images/
 ```
 Con los nombres recomendados (e.g. `sandino_general.jpg`, `san_jacinto_batalla.jpg`, `castillo_inmaculada.jpg`, etc.).
+=======
+# ecos-de-soberania
+Museo virtual sobre la historia nicaraguense y de centroamérica con actividades interactivas
+>>>>>>> d0af95302f006c36e1448909396e4a8c8bea5b5c
