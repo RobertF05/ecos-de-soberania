@@ -1,0 +1,1550 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0067C6">
+  <title>Ecos de Soberanía | Museo Digital e Identidad Nacional de Nicaragua</title>
+  <style>
+    /* Colorimetría Oficial de la Bandera de Nicaragua (Azul Cobalto #0067C6, Blanco #FFFFFF, Oro #E5A823) */
+    :root {
+      --nica-blue: #0067C6;       /* Azul Cobalto Oficial de la Bandera */
+      --nica-blue-dark: #004B91;  /* Azul Marino Institucional */
+      --nica-blue-deep: #00224A;  /* Azul Profundo para Fondos */
+      --nica-blue-soft: #EBF4FD;  /* Blanco con matiz azul suave */
+      --nica-white: #FFFFFF;      /* Blanco Puro de la Bandera */
+      --nica-gold: #E5A823;       /* Dorado Oficial del Escudo Nacional */
+      --nica-gold-hover: #F59E0B; /* Ámbar Dorado */
+      --nica-volcano: #3E8926;    /* Verde de los cinco volcanes */
+      --nica-red: #D32F2F;        /* Rojo del gorro frigio */
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--nica-blue-deep);
+      color: #FFFFFF;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.5;
+      background-image: 
+        radial-gradient(at 10% 15%, rgba(0, 103, 198, 0.5) 0px, transparent 60%),
+        radial-gradient(at 90% 85%, rgba(229, 168, 35, 0.25) 0px, transparent 50%),
+        radial-gradient(at 50% 50%, rgba(0, 75, 145, 0.6) 0px, transparent 70%),
+        linear-gradient(180deg, #001B3A 0%, #002A5A 50%, #001936 100%);
+      background-attachment: fixed;
+    }
+    /* Franja tricolor de la Bandera de Nicaragua (Azul - Blanco - Azul) */
+    .franja-nicaragua {
+      height: 6px;
+      background: linear-gradient(
+        to bottom,
+        #0067C6 0%,
+        #0067C6 33.3%,
+        #FFFFFF 33.3%,
+        #FFFFFF 66.6%,
+        #0067C6 66.6%,
+        #0067C6 100%
+      );
+      width: 100%;
+    }
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: var(--nica-blue);
+      border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 4px 25px rgba(0, 34, 74, 0.6);
+    }
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+      height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo-badge {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      cursor: pointer;
+    }
+    .logo-icon-box {
+      background: white;
+      border-radius: 12px;
+      padding: 4px;
+      border: 2px solid var(--nica-gold);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .logo-title {
+      font-size: 1.35rem;
+      font-weight: 900;
+      font-family: Georgia, serif;
+      color: #FFFFFF;
+      letter-spacing: -0.5px;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+    .logo-sub {
+      font-size: 0.7rem;
+      color: #EBF4FD;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 700;
+    }
+
+    .btn-nav {
+      padding: 0.55rem 0.85rem;
+      border-radius: 10px;
+      font-size: 0.82rem;
+      font-weight: 800;
+      border: none;
+      background: transparent;
+      color: #FFFFFF;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: all 0.2s;
+    }
+    .btn-nav:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+    .btn-nav.active {
+      background: #FFFFFF;
+      color: #0067C6;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+    .btn-qr {
+      background: var(--nica-gold);
+      color: #002B59;
+      font-weight: 900;
+      box-shadow: 0 4px 15px rgba(229, 168, 35, 0.4);
+    }
+    .btn-qr:hover {
+      background: var(--nica-gold-hover);
+      transform: scale(1.04);
+    }
+    main {
+      flex: 1;
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 1.5rem 1rem;
+    }
+    /* Banner Principal */
+    .hero-banner {
+      background: linear-gradient(135deg, #004B91, #0067C6, #003B77);
+      border: 2px solid rgba(255, 255, 255, 0.4);
+      border-radius: 24px;
+      padding: 2.25rem;
+      margin-bottom: 2rem;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 12px 35px rgba(0, 34, 74, 0.5);
+    }
+    .badge-patria {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: white;
+      color: var(--nica-blue);
+      padding: 0.3rem 0.85rem;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: 900;
+      margin-bottom: 0.75rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      text-transform: uppercase;
+    }
+    .badge-gold {
+      background: var(--nica-gold);
+      color: #002B59;
+    }
+    .hero-h1 {
+      font-family: Georgia, serif;
+      font-size: 2.3rem;
+      font-weight: 900;
+      color: #FFFFFF;
+      margin-bottom: 0.5rem;
+      line-height: 1.2;
+      text-shadow: 0 2px 10px rgba(0, 34, 74, 0.5);
+    }
+    .hero-desc {
+      color: #EBF4FD;
+      font-size: 0.98rem;
+      max-width: 820px;
+      font-weight: 500;
+    }
+    /* Selector de Trayectos */
+    .tabs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 0.85rem;
+      margin-bottom: 1.5rem;
+    }
+    .tab-card {
+      background: #002D5E;
+      border: 2px solid rgba(255,255,255,0.2);
+      border-radius: 16px;
+      padding: 1.1rem;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+    .tab-card:hover {
+      border-color: #FFFFFF;
+      background: #003C7A;
+    }
+    .tab-card.active {
+      background: #FFFFFF;
+      color: #002B59;
+      border-color: var(--nica-gold);
+      box-shadow: 0 8px 25px rgba(229, 168, 35, 0.35);
+      transform: scale(1.02);
+    }
+    .tab-card.active::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: var(--nica-blue);
+    }
+    .tab-badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 900;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      margin-bottom: 0.5rem;
+    }
+    .tab-card.active .tab-badge {
+      background: var(--nica-blue);
+      color: #FFFFFF;
+    }
+    .tab-card:not(.active) .tab-badge {
+      background: rgba(255,255,255,0.15);
+      color: #E2E8F0;
+    }
+    .tab-title {
+      font-size: 0.96rem;
+      font-weight: 800;
+    }
+    .tab-card.active .tab-title {
+      color: #002B59;
+    }
+    .tab-card:not(.active) .tab-title {
+      color: #FFFFFF;
+    }
+    .tab-period {
+      font-size: 0.74rem;
+      font-family: monospace;
+      margin-top: 0.25rem;
+      font-weight: 800;
+    }
+    .tab-card.active .tab-period {
+      color: var(--nica-blue);
+    }
+    .tab-card:not(.active) .tab-period {
+      color: #93C5FD;
+    }
+    /* Detalle de Trayecto */
+    .trayecto-body {
+      background: linear-gradient(to bottom, #00366F, #001F42);
+      border: 2px solid var(--nica-blue);
+      border-radius: 24px;
+      padding: 2.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.75rem;
+      box-shadow: 0 12px 35px rgba(0, 34, 74, 0.6);
+      position: relative;
+      overflow: hidden;
+    }
+    .quote-box {
+      background: #FFFFFF;
+      color: #002B59;
+      border-left: 8px solid var(--nica-blue);
+      padding: 1.25rem 1.5rem;
+      border-radius: 12px;
+      font-family: Georgia, serif;
+      font-style: italic;
+      position: relative;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+      font-size: 1.05rem;
+      font-weight: 600;
+    }
+    .quote-author {
+      font-family: system-ui, sans-serif;
+      font-style: normal;
+      font-size: 0.78rem;
+      color: var(--nica-blue);
+      font-weight: 800;
+      margin-top: 0.6rem;
+      display: flex;
+      justify-content: space-between;
+      border-top: 1px solid #E2E8F0;
+      padding-top: 0.5rem;
+    }
+    /* Placeholders de imágenes */
+    .img-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+    .img-card {
+      border: 2px dashed var(--nica-blue);
+      background: linear-gradient(to bottom, #003B77, #00224A);
+      border-radius: 18px;
+      padding: 1.5rem;
+      text-align: center;
+      transition: all 0.3s;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+    }
+    .img-card:hover {
+      border-color: var(--nica-gold);
+      transform: translateY(-2px);
+    }
+    .img-badge {
+      background: white;
+      color: #002B59;
+      border-radius: 6px;
+      padding: 0.3rem 0.75rem;
+      font-size: 0.74rem;
+      font-family: monospace;
+      font-weight: 800;
+      display: inline-block;
+      margin-top: 0.6rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+    /* Hitos */
+    .hitos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 0.85rem;
+    }
+    .hito-card {
+      background: #FFFFFF;
+      color: #002B59;
+      border: 2px solid var(--nica-blue);
+      border-radius: 16px;
+      padding: 1rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .hito-year {
+      background: var(--nica-blue);
+      color: #FFFFFF;
+      font-size: 0.74rem;
+      font-weight: 900;
+      padding: 0.2rem 0.6rem;
+      border-radius: 50px;
+      display: inline-block;
+      font-family: monospace;
+      margin-bottom: 0.4rem;
+    }
+    /* Trivia */
+    .trivia-card {
+      background: linear-gradient(to bottom, #003B77, #00224A);
+      border: 2px solid var(--nica-blue);
+      border-radius: 24px;
+      padding: 2.25rem;
+      max-width: 820px;
+      margin: 0 auto;
+      box-shadow: 0 15px 40px rgba(0, 34, 74, 0.7);
+      position: relative;
+      overflow: hidden;
+    }
+    .opcion-btn {
+      width: 100%;
+      text-align: left;
+      background: #002B59;
+      border: 2px solid rgba(255,255,255,0.2);
+      border-radius: 16px;
+      padding: 1.1rem;
+      color: #FFFFFF;
+      cursor: pointer;
+      margin-bottom: 0.85rem;
+      display: flex;
+      gap: 0.85rem;
+      align-items: flex-start;
+      transition: all 0.2s;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+    .opcion-btn:hover {
+      border-color: #FFFFFF;
+      background: #003B77;
+    }
+    .opcion-btn.selected {
+      border-color: var(--nica-gold);
+      background: #FFFFFF;
+      color: #002B59;
+      box-shadow: 0 6px 20px rgba(229, 168, 35, 0.35);
+      transform: scale(1.01);
+    }
+    .opcion-num {
+      background: rgba(255,255,255,0.2);
+      color: white;
+      font-weight: 900;
+      font-size: 0.8rem;
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      flex-shrink: 0;
+    }
+    .opcion-btn.selected .opcion-num {
+      background: var(--nica-blue);
+      color: white;
+    }
+    .action-btn {
+      background: var(--nica-gold);
+      color: #002B59;
+      border: none;
+      font-weight: 900;
+      padding: 0.85rem 1.75rem;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 0.95rem;
+      transition: all 0.2s;
+      box-shadow: 0 4px 15px rgba(229, 168, 35, 0.4);
+    }
+    .action-btn:hover {
+      transform: scale(1.03);
+      background: var(--nica-gold-hover);
+    }
+    /* Estilos del Mapa Interactivo */
+    .mapa-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+    @media (min-width: 992px) {
+      .mapa-layout {
+        grid-template-columns: 1.15fr 0.85fr;
+      }
+    }
+    .map-frame {
+      position: relative;
+      background: #001F42;
+      border-radius: 20px;
+      border: 2px solid rgba(255,255,255,0.2);
+      overflow: hidden;
+      box-shadow: inset 0 0 30px rgba(0,0,0,0.5);
+    }
+    .map-pin {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      padding: 0;
+      z-index: 20;
+    }
+    .pin-circle {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: #0067C6;
+      border: 2px solid white;
+      color: white;
+      font-size: 11px;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+      transition: all 0.2s;
+    }
+    .map-pin.active .pin-circle {
+      background: var(--nica-gold);
+      color: #002B59;
+      transform: scale(1.3);
+      border-color: white;
+      box-shadow: 0 0 15px rgba(229, 168, 35, 0.8);
+    }
+    .map-pin:hover .pin-circle {
+      transform: scale(1.2);
+      background: var(--nica-gold);
+      color: #002B59;
+    }
+    /* Modal QR */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 18, 40, 0.9);
+      backdrop-filter: blur(8px);
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+    .modal-overlay.open {
+      display: flex;
+    }
+    .modal-box {
+      background: linear-gradient(to bottom, #003B77, #00224A);
+      border: 4px solid var(--nica-blue);
+      border-radius: 24px;
+      padding: 2.25rem;
+      max-width: 450px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.8);
+      position: relative;
+      overflow: hidden;
+    }
+    .qr-frame {
+      background: white;
+      padding: 1.1rem;
+      border-radius: 16px;
+      border: 4px solid var(--nica-blue);
+      display: inline-block;
+      margin: 1.25rem auto;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    }
+    footer {
+      background: #001D3D;
+      border-top: 2px solid var(--nica-blue);
+      padding: 2rem 1rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: #CBD5E1;
+      margin-top: auto;
+      position: relative;
+    }
+    .simbolos-footer {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Barra de Navegación -->
+  <header>
+    <div class="franja-nicaragua"></div>
+    <div class="nav-container">
+      <div class="logo-badge" onclick="cambiarVista('museo')">
+        <div class="logo-icon-box">
+          <svg viewBox="0 0 100 100" width="38" height="38" fill="none">
+            <polygon points="50,14 88,80 12,80" stroke="#E5A823" stroke-width="3.5" fill="#002D5E" stroke-linejoin="round"/>
+            <polygon points="50,17 85,78 15,78" fill="#5BB4E5" opacity="0.35"/>
+            <line x1="50" y1="44" x2="50" y2="24" stroke="#FFD54F" stroke-width="1.5"/>
+            <path d="M26 50 A24 24 0 0 1 74 50" stroke="#E53935" stroke-width="1.5" fill="none"/>
+            <path d="M28 50 A22 22 0 0 1 72 50" stroke="#FB8C00" stroke-width="1.5" fill="none"/>
+            <path d="M30 50 A20 20 0 0 1 70 50" stroke="#FDD835" stroke-width="1.5" fill="none"/>
+            <path d="M32 50 A18 18 0 0 1 68 50" stroke="#43A047" stroke-width="1.5" fill="none"/>
+            <path d="M34 50 A16 16 0 0 1 66 50" stroke="#0067C6" stroke-width="1.5" fill="none"/>
+            <path d="M14 78 Q50 72 86 78 L86 80 L14 80 Z" fill="#0067C6"/>
+            <polygon points="18,77 28,58 38,77" fill="#3E8926"/>
+            <polygon points="30,77 40,54 50,77" fill="#2E6B1B"/>
+            <polygon points="42,77 50,48 58,77" fill="#4E9F31"/>
+            <polygon points="50,77 60,54 70,77" fill="#2E6B1B"/>
+            <polygon points="62,77 72,60 82,77" fill="#3E8926"/>
+            <circle cx="50" cy="44" r="4.5" fill="#D32F2F"/>
+          </svg>
+        </div>
+        <div>
+          <div class="logo-title">Ecos de Soberanía</div>
+          <div class="logo-sub">Memoria e Identidad Nacional de Nicaragua</div>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 0.5rem; align-items: center;">
+        <button id="btn-nav-museo" class="btn-nav active" onclick="cambiarVista('museo')">
+          🏛️ Museo Virtual
+        </button>
+        <button id="btn-nav-mapa" class="btn-nav" onclick="cambiarVista('mapa')">
+          🗺️ Mapa Interactivo
+        </button>
+        <button id="btn-nav-trivia" class="btn-nav" onclick="cambiarVista('trivia')">
+          ⚖️ Línea de Decisiones
+        </button>
+        <button class="btn-nav btn-qr" onclick="abrirModalQR()">
+          📱 Conectar Móvil
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Contenido Principal -->
+  <main>
+    <!-- VISTA 1: MUSEO VIRTUAL -->
+    <div id="vista-museo">
+      <div class="hero-banner">
+        <div class="franja-nicaragua" style="position: absolute; top: 0; left: 0; right: 0;"></div>
+        <div style="display: flex; gap: 0.5rem; margin-bottom: 0.5rem;">
+          <div class="badge-patria">🇳🇮 Pabellón de la Memoria Viva</div>
+          <div class="badge-patria badge-gold">Azul y Blanco Soberano</div>
+        </div>
+        <h1 class="hero-h1">Ecos de Soberanía</h1>
+        <p class="hero-desc">
+          Recorre los cuatro trayectos cardinales que forjaron la autodeterminación, la dignidad y el carácter multiétnico de Nicaragua. La historia no es un recuerdo estático: es la raíz viva de nuestra identidad.
+        </p>
+      </div>
+
+      <div style="margin-bottom: 0.75rem; display: flex; justify-content: space-between; align-items: center;">
+        <h2 style="font-size: 0.88rem; text-transform: uppercase; letter-spacing: 1px; color: var(--nica-gold); font-weight: 800;">
+          🧭 Trayectos Históricos del Museo
+        </h2>
+        <span style="font-size: 0.78rem; color: #93C5FD; font-weight: 600;">Haz clic en un eje para recorrerlo</span>
+      </div>
+
+      <div class="tabs-grid" id="contenedor-tabs"></div>
+      <div class="trayecto-body" id="detalle-trayecto"></div>
+    </div>
+
+    <!-- VISTA 2: MAPA INTERACTIVO DEPARTAMENTAL -->
+    <div id="vista-mapa" style="display: none;">
+      <div class="hero-banner">
+        <div class="franja-nicaragua" style="position: absolute; top: 0; left: 0; right: 0;"></div>
+        <div style="display: flex; gap: 0.5rem; margin-bottom: 0.5rem;">
+          <div class="badge-patria">🗺️ Cartografía de la Soberanía</div>
+          <div class="badge-patria badge-gold">15 Departamentos • 2 Regiones Autónomas</div>
+        </div>
+        <h1 class="hero-h1">Geografía de la Memoria y la Identidad</h1>
+        <p class="hero-desc">
+          Toca o haz clic sobre cualquier departamento o región en el mapa de Nicaragua para descubrir los acontecimientos históricos, las batallas patrióticas y los héroes que forjaron la identidad de esa tierra.
+        </p>
+      </div>
+
+      <!-- Barra de Filtros de Región -->
+      <div style="background: #002D5E; border: 2px solid var(--nica-blue); border-radius: 16px; padding: 0.85rem 1.25rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 1.5rem;">
+        <div style="display: flex; gap: 0.4rem; align-items: center; flex-wrap: wrap;">
+          <span style="font-size: 0.75rem; font-weight: 800; color: var(--nica-gold); text-transform: uppercase;">Filtrar:</span>
+          <button id="btn-filtro-todas" class="btn-nav active" style="font-size: 0.75rem; padding: 0.3rem 0.7rem;" onclick="filtrarRegion('Todas')">Todas (17)</button>
+          <button id="btn-filtro-pacifico" class="btn-nav" style="font-size: 0.75rem; padding: 0.3rem 0.7rem;" onclick="filtrarRegion('Pacífico')">Pacífico (7)</button>
+          <button id="btn-filtro-norte" class="btn-nav" style="font-size: 0.75rem; padding: 0.3rem 0.7rem;" onclick="filtrarRegion('Norte y Central')">Norte y Central (8)</button>
+          <button id="btn-filtro-caribe" class="btn-nav" style="font-size: 0.75rem; padding: 0.3rem 0.7rem;" onclick="filtrarRegion('Costa Caribe')">Costa Caribe (2)</button>
+        </div>
+      </div>
+
+      <!-- Layout: Mapa a la izquierda + Panel a la derecha -->
+      <div class="mapa-layout">
+        <!-- Contenedor del Mapa -->
+        <div style="background: #002D5E; border: 2px solid var(--nica-blue); border-radius: 24px; padding: 1.25rem; position: relative;">
+          <div class="franja-nicaragua" style="position: absolute; top: 0; left: 0; right: 0;"></div>
+          
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; margin-top: 0.5rem;">
+            <h3 style="font-size: 1rem; font-weight: 900; color: white;">📍 Mapa Departamental</h3>
+            <span style="font-size: 0.72rem; color: var(--nica-gold); font-weight: 800; background: #001D3D; padding: 0.2rem 0.6rem; border-radius: 50px;">Toca cualquier pin</span>
+          </div>
+
+          <div class="map-frame" id="contenedor-mapa-frame">
+            <img src="./assets/images/mapa_nicaragua.png" 
+                 onerror="if(this.src.indexOf('assets/images')!==-1){this.src='./assets/mapa_nicaragua.png';}else if(this.src.indexOf('assets/mapa_nicaragua.png')!==-1){this.src='./mapa_nicaragua.png';}" 
+                 alt="Mapa de Nicaragua" 
+                 style="width: 100%; height: auto; display: block; user-select: none;">
+            <div id="contenedor-pines-mapa"></div>
+          </div>
+
+          <!-- Acceso Rápido Departamental -->
+          <div style="margin-top: 1rem; padding-top: 0.75rem; border-top: 1px solid rgba(255,255,255,0.15);">
+            <p style="font-size: 0.72rem; color: #93C5FD; font-weight: 800; text-transform: uppercase; margin-bottom: 0.5rem;">Lista de Departamentos:</p>
+            <div id="lista-deptos-botones" style="display: flex; flex-wrap: wrap; gap: 0.35rem; max-height: 120px; overflow-y: auto;"></div>
+          </div>
+        </div>
+
+        <!-- Panel de Información Histórica -->
+        <div id="panel-depto-detalle" class="trayecto-body" style="padding: 1.5rem; gap: 1.25rem;"></div>
+      </div>
+    </div>
+
+    <!-- VISTA 3: TRIVIA / LÍNEA DE DECISIONES -->
+    <div id="vista-trivia" style="display: none;">
+      <div class="trivia-card" id="contenedor-trivia"></div>
+    </div>
+  </main>
+
+  <!-- Modal Código QR -->
+  <div id="modal-qr" class="modal-overlay" onclick="cerrarModalQR()">
+    <div class="modal-box" onclick="event.stopPropagation()">
+      <div class="franja-nicaragua" style="position: absolute; top: 0; left: 0; right: 0;"></div>
+      <button style="position: absolute; top: 1rem; right: 1rem; background: none; border: none; color: #FFFFFF; font-size: 1.35rem; cursor: pointer;" onclick="cerrarModalQR()">✕</button>
+      
+      <div style="margin-top: 0.5rem;">
+        <h3 style="font-family: Georgia, serif; font-size: 1.4rem; font-weight: 900; color: white;">
+          Conectar Celular en la Feria
+        </h3>
+        <p style="font-size: 0.78rem; color: #93C5FD; font-weight: 700; margin-top: 0.25rem;">
+          Red Local Offline (LAN) • No requiere internet
+        </p>
+      </div>
+
+      <div class="qr-frame">
+        <img id="img-qr-modal" src="" alt="Código QR LAN" style="width: 200px; height: 200px; display: block;">
+      </div>
+
+      <div style="background: white; color: #002B59; border-radius: 12px; padding: 0.85rem; font-size: 0.78rem; text-align: left; margin-bottom: 1rem; font-weight: 600;">
+        <p>1. Conecta tu celular al mismo WiFi que esta laptop.</p>
+        <p>2. Escanea este código QR con la cámara de tu teléfono.</p>
+        <p>3. Abre el museo, el mapa y responde la trivia desde tu mano.</p>
+      </div>
+
+      <p id="txt-url-modal" style="font-family: monospace; font-size: 0.85rem; color: var(--nica-gold); word-break: break-all; margin-bottom: 1rem; font-weight: 800;"></p>
+
+      <button class="action-btn" style="width: 100%;" onclick="cerrarModalQR()">Cerrar</button>
+    </div>
+  </div>
+
+  <!-- Pie de página patriótico -->
+  <footer>
+    <div class="franja-nicaragua" style="position: absolute; top: 0; left: 0; right: 0;"></div>
+    <div class="simbolos-footer">
+      <span title="Flor Nacional">🌼 Sacuanjoche</span>
+      <span title="Escudo Nacional">🇳🇮 Escudo Nacional</span>
+      <span title="Ave Nacional">🦜 Guardabarranco</span>
+      <span title="Héroe Nacional">⭐ Sandino</span>
+    </div>
+    <p style="font-family: Georgia, serif; font-style: italic; color: #FFFFFF; margin-bottom: 0.5rem; font-size: 0.95rem;">
+      “Nicaragua será libre mientras tenga hijos que la amen.” — General Augusto C. Sandino
+    </p>
+    <p style="font-size: 0.75rem; color: #93C5FD; font-weight: 600;">
+      Proyecto de Feria Universitaria • Colorimetría Oficial de la Bandera de Nicaragua (Azul Cobalto #0067C6, Blanco y Oro).
+    </p>
+  </footer>
+
+  <!-- Lógica de la Aplicación -->
+  <script>
+    const TRAYECTOS = [
+      {
+        id: "raices",
+        numero: "I",
+        nombre: "Raíces e Independencia",
+        periodo: "1821 – 1856",
+        subtitulo: "La Ruptura Colonial y la Gesta contra el Filibusterismo",
+        cita: "Andrés Castro derribó de una certera pedrada a un filibustero armado con rifle de repetición, simbolizando el valor ancestral de un pueblo que no tolera cadenas.",
+        citaAutor: "Batalla de San Jacinto, 14 de Septiembre de 1856",
+        descripcion: "Desde la independencia de 1821, Nicaragua enfrentó apetitos foráneos por su estratégica posición para una ruta interoceánica. En 1856, William Walker intentó esclavizar al país. La gloriosa Batalla de San Jacinto demostró la invencible dignidad nacional.",
+        hitos: [
+          { año: "1821", titulo: "Acta de Independencia", desc: "Ruptura colonial y primeros pasos de la autodeterminación." },
+          { año: "1856", titulo: "Batalla de San Jacinto", desc: "160 patriotas y 60 indios flecheros de Matagalpa expulsan a los invasores." },
+          { año: "1857", titulo: "Victoria Nacional", desc: "Expulsión definitiva del filibusterismo de Centroamérica." }
+        ],
+        imagenes: [
+          { archivo: "san_jacinto_batalla.jpg", titulo: "Batalla de San Jacinto", desc: "Andrés Castro y la defensa heroica de la Hacienda." },
+          { archivo: "indios_flecheros.jpg", titulo: "Indios Flecheros de Matagalpa", desc: "Vanguardia indígena patriótica determinante." }
+        ]
+      },
+      {
+        id: "antiimperialismo",
+        numero: "II",
+        nombre: "Antiimperialismo y Dignidad",
+        periodo: "1912 – 1934",
+        subtitulo: "De la Inmolación de Zeledón al Ejército Defensor de Sandino",
+        cita: "Si los yanquis no quieren comprender que Nicaragua no es de ellos, se los haremos comprender a balazos en Las Segovias.",
+        citaAutor: "General Augusto C. Sandino, Manifiesto de San Albino (1927)",
+        descripcion: "En 1912 el General Benjamín Zeledón prefirió morir antes que rendir el cerro Coyotepe. En 1927, Sandino rechazó el Pacto del Espino Negro, organizó el EDSN y con 29 campesinos expulsó a las tropas invasoras tras seis años de combate.",
+        hitos: [
+          { año: "1912", titulo: "Gesta de Benjamín Zeledón", desc: "Resistencia heroica en el Cerro Coyotepe de Masaya." },
+          { año: "1927", titulo: "Fundación del EDSN", desc: "Sandino inicia la guerra de liberación en Las Segovias." },
+          { año: "1933", titulo: "Retirada de los Marines", desc: "Triunfo moral y militar de la soberanía nicaragüense." }
+        ],
+        imagenes: [
+          { archivo: "sandino_general.jpg", titulo: "General Augusto C. Sandino", desc: "General de Hombres Libres en el Chipote." },
+          { archivo: "zeledon_coyotepe.jpg", titulo: "General Benjamín Zeledón", desc: "Héroe Nacional de la Dignidad en Coyotepe." }
+        ]
+      },
+      {
+        id: "revolucion",
+        numero: "III",
+        nombre: "Resistencia y Revolución",
+        periodo: "1960s – 1980s",
+        subtitulo: "Soberanía Popular y la Cruzada Nacional de Alfabetización",
+        cita: "Convertimos la oscuridad de la ignorancia en la luz resplandeciente de la educación popular.",
+        citaAutor: "Gran Cruzada Nacional de Alfabetización (1980)",
+        descripcion: "El Comandante Carlos Fonseca sintetizó las luchas patrias fundando el FSLN. En 1980, la Revolución desplegó a más de 95,000 jóvenes en la Gran Cruzada de Alfabetización, reduciendo el analfabetismo al 12.9% en cinco meses.",
+        hitos: [
+          { año: "1961", titulo: "Fundación del FSLN", desc: "Articulación del pensamiento de Sandino por Carlos Fonseca." },
+          { año: "1979", titulo: "Triunfo Revolucionario", desc: "Caída de la dictadura e inicio de transformaciones sociales." },
+          { año: "1980", titulo: "Cruzada de Alfabetización", desc: "Hazaña educativa galardonada por la UNESCO." }
+        ],
+        imagenes: [
+          { archivo: "cruzada_alfabetizacion.jpg", titulo: "Brigadistas del EPA", desc: "Jóvenes estudiantes alfabetizando en la montaña." },
+          { archivo: "carlos_fonseca.jpg", titulo: "Carlos Fonseca Amador", desc: "Fundador del FSLN y forjador de conciencias." }
+        ]
+      },
+      {
+        id: "caribe",
+        numero: "IV",
+        nombre: "Autonomía de la Costa Caribe",
+        periodo: "1987 – Presente",
+        subtitulo: "La Consagración de una Nación Multiétnica y Pluricultural",
+        cita: "La autonomía regional reconoce los derechos históricos de los pueblos originarios sobre sus tierras comunales y sus lenguas ancestrales.",
+        citaAutor: "Estatuto de Autonomía de la Costa Caribe (Ley 28)",
+        descripcion: "La Ley 28 de 1987 reconoció que Nicaragua es una sola patria forjada en la diversidad de sus pueblos Miskitu, Mayangna, Rama, Creoles, Garífunas y Mestizos, garantizando propiedad comunal y educación bilingüe.",
+        hitos: [
+          { año: "1987", titulo: "Aprobación Ley 28", desc: "Nacimiento de las Regiones Autónomas RACCN y RACCS." },
+          { año: "2003", titulo: "Demarcación y Titulación", desc: "Entrega de títulos comunales ancestrales (Ley 445)." },
+          { año: "Actualidad", titulo: "Educación Bilingüe", desc: "Preservación y revitalización de las lenguas originarias." }
+        ],
+        imagenes: [
+          { archivo: "pueblos_costa_caribe.jpg", titulo: "Pueblos Originarios y Afrodescendientes", desc: "Celebración y asambleas comunales del Caribe." },
+          { archivo: "mapa_autonomia.jpg", titulo: "Territorios Indígenas", desc: "Demarcación comunal protegida constitucionalmente." }
+        ]
+      }
+    ];
+
+    // Datos de los 17 Departamentos y Regiones de Nicaragua
+    const DEPARTAMENTOS = [
+      {
+        id: "nueva-segovia",
+        nombre: "Nueva Segovia",
+        cabecera: "Ocotal",
+        region: "Norte y Central",
+        x: 31.0, y: 31.0,
+        hito: "Cuartel General del General Sandino en El Chipote y Manifiesto de San Albino (1927)",
+        año: "1927 – 1933",
+        personajes: "General Augusto C. Sandino, Estado Mayor del EDSN",
+        sitio: "Mineral de San Albino, Cerro El Chipote",
+        relato: "En las escarpadas montañas de Nueva Segovia, Sandino fundó el Ejército Defensor de la Soberanía Nacional con 29 hombres tras rechazar el infame Pacto del Espino Negro. Ocotal fue escenario del primer combate militar donde la aviación de los marines bombardeó a la población.",
+        cita: "'Mi espada tiene por vaina el corazón del opresor.' — General Sandino",
+        imagen: "sandino_general.jpg"
+      },
+      {
+        id: "jinotega",
+        nombre: "Jinotega",
+        cabecera: "Jinotega",
+        region: "Norte y Central",
+        x: 46.0, y: 31.0,
+        hito: "Columna Vertebral de la Resistencia Segoviana y Cuna de Blanca Aráuz",
+        año: "1927 – 1934",
+        personajes: "Blanca Aráuz Pineda (Heroína Nacional), General Sandino",
+        sitio: "San Rafael del Norte, Montañas de Yalí",
+        relato: "San Rafael del Norte fue el centro telegrafista de la revolución patriótica gracias a Blanca Aráuz. Las tupidas selvas y cafetales de Jinotega sirvieron de bastión inexpugnable donde los campesinos resguardaron al EDSN contra las tropas de ocupación extranjera.",
+        cita: "'La telegrafista de la patria que comunicó la dignidad nacional.'",
+        imagen: "blanca_arauz.jpg"
+      },
+      {
+        id: "madriz",
+        nombre: "Madriz",
+        cabecera: "Somoto",
+        region: "Norte y Central",
+        x: 29.4, y: 37.0,
+        hito: "Corredor Histórico de Yalagüina y Rutas del EDSN",
+        año: "1912 – 1930s",
+        personajes: "Patriotas campesinos segovianos",
+        sitio: "Cañón de Somoto, Cerros de Yalagüina",
+        relato: "Tierra de arraigo indígena y artesanal, sus cañones y montañas fueron rutas secretas de abastecimiento para las fuerzas defensoras de la soberanía. Sus pobladores mantuvieron viva la identidad norteña y el apoyo logístico al ideario de hombres libres.",
+        cita: "'En cada valle segoviano late el pulso de la libertad.'",
+        imagen: "madriz_somoto.jpg"
+      },
+      {
+        id: "esteli",
+        nombre: "Estelí",
+        cabecera: "Estelí",
+        region: "Norte y Central",
+        x: 28.5, y: 43.3,
+        hito: "Tres Insurrecciones Heroicas de la Juventud (1978 – 1979)",
+        año: "1978 – 1979",
+        personajes: "Filemón Rivera, Juventud Insurrecta Esteliana",
+        sitio: "Catedral de Estelí, Parque Central",
+        relato: "Conocida como 'Tres Veces Heroica', la ciudad de Estelí libró tres épicas batallas insurreccionales contra la Guardia Somocista. Su pueblo combatió casa por casa, demostrando que la unidad popular era capaz de derribar la más férrea tiranía apoyada desde el exterior.",
+        cita: "'¡Estelí combativo, tres veces heroico e indestructible!'",
+        imagen: "esteli_insurreccion.jpg"
+      },
+      {
+        id: "chinandega",
+        nombre: "Chinandega",
+        cabecera: "Chinandega",
+        region: "Pacífico",
+        x: 16.0, y: 48.5,
+        hito: "Defensa del Puerto de El Realejo y el Golfo de Fonseca",
+        año: "Siglos XVI – XIX",
+        personajes: "Artesanos navales y marineros defensores",
+        sitio: "Puerto El Realejo, Volcán San Cristóbal",
+        relato: "Desde el virreinato, El Realejo fue uno de los astilleros más estratégicos del Pacífico centroamericano. Chinandega defendió sus costas contra corsarios ingleses y tentativas de invasión foránea que buscaban apoderarse de la salida oceánica nicaragüense.",
+        cita: "'Centinela marítimo de nuestro Pacífico soberano.'",
+        imagen: "chinandega_puerto.jpg"
+      },
+      {
+        id: "leon",
+        nombre: "León",
+        cabecera: "León",
+        region: "Pacífico",
+        x: 24.3, y: 57.0,
+        hito: "Gesta Heroica de Rigoberto López Pérez (1956) y Primera Capital Liberada",
+        año: "1956 / 1979",
+        personajes: "Rigoberto López Pérez, Félix Rubén Darío",
+        sitio: "Casa del Obrero, Fortín de Acosasco",
+        relato: "El 21 de septiembre de 1956, el joven poeta Rigoberto López Pérez ajustició al dictador Anastasio Somoza García en la Casa del Obrero, iniciando 'el principio del fin' de la tiranía. En 1979, León fue proclamada la Primera Capital de la Revolución.",
+        cita: "'Lo mío no ha sido un sacrificio sino un deber que espero haber cumplido.' — Rigoberto López Pérez",
+        imagen: "leon_fortin.jpg"
+      },
+      {
+        id: "matagalpa",
+        nombre: "Matagalpa",
+        cabecera: "Matagalpa",
+        region: "Norte y Central",
+        x: 42.0, y: 48.5,
+        hito: "Los 60 Indios Flecheros de San Jacinto y Cuna de Carlos Fonseca",
+        año: "1856 / 1936",
+        personajes: "Comandante Carlos Fonseca Amador, Indios Flecheros de Matagalpa",
+        sitio: "Casa Cuna de Carlos Fonseca, Cerro Apante",
+        relato: "El 11 de septiembre de 1856, 60 indios flecheros marcharon desde Matagalpa armados con arcos y flechas para sumarse a la Batalla de San Jacinto, siendo determinantes en la derrota del filibusterismo. Matagalpa es además la cuna de Carlos Fonseca Amador, fundador del FSLN.",
+        cita: "'Y también enséñenles a leer.' — Comandante Carlos Fonseca",
+        imagen: "indios_flecheros.jpg"
+      },
+      {
+        id: "managua",
+        nombre: "Managua",
+        cabecera: "Managua",
+        region: "Pacífico",
+        x: 31.0, y: 66.5,
+        hito: "Batalla de la Hacienda San Jacinto (1856) y Triunfo del 19 de Julio (1979)",
+        año: "1856 / 1979",
+        personajes: "Andrés Castro, Coronel José Dolores Estrada",
+        sitio: "Hacienda San Jacinto, Plaza de la Revolución",
+        relato: "En los llanos de Tipitapa se alza la Hacienda San Jacinto, donde el 14 de septiembre de 1856 Andrés Castro derribó de una certera pedrada al invasor filibustero. En la capital culminó victoriosa la Ofensiva Final el 19 de julio de 1979 ante una multitud congregada en la Plaza de la Revolución.",
+        cita: "'La pedrada de Andrés resuena eterna en la conciencia de la patria.'",
+        imagen: "san_jacinto_batalla.jpg"
+      },
+      {
+        id: "masaya",
+        nombre: "Masaya",
+        cabecera: "Masaya",
+        region: "Pacífico",
+        x: 36.1, y: 68.8,
+        hito: "Inmolación de Benjamín Zeledón en Coyotepe (1912) y Heroísmo de Monimbó",
+        año: "1912 / 1978",
+        personajes: "General Benjamín Zeledón, Pueblo Indígena de Monimbó",
+        sitio: "Cerro Coyotepe, Comunidad Indígena de Monimbó",
+        relato: "En octubre de 1912, el General Benjamín Zeledón defendió la fortaleza de Coyotepe ante el asedio artillero de tropas estadounidenses, prefiriendo morir antes que capitular. En 1978, la comunidad indígena de Monimbó se alzó con bombas de mecate y marimbas contra la dictadura.",
+        cita: "'Masaya: ¡Monimbó es Nicaragua!'",
+        imagen: "zeledon_coyotepe.jpg"
+      },
+      {
+        id: "carazo",
+        nombre: "Carazo",
+        cabecera: "Jinotepe",
+        region: "Pacífico",
+        x: 30.2, y: 73.7,
+        hito: "Cuna del Güegüense: La Primera Obra de Resistencia Satírica Colonial",
+        año: "Siglo XVII / 1979",
+        personajes: "Cultores tradicionales de Diriamba y Jinotepe",
+        sitio: "Reloj de Diriamba, Basílica de San Sebastián",
+        relato: "En Carazo nació 'El Güegüense o Macho Ratón', drama satírico que mediante el doble sentido burló la autoridad colonial española. Declarado Patrimonio Inmaterial de la Humanidad por la UNESCO, representa el ingenio mestizo en defensa de su autonomía.",
+        cita: "'Una burla magistral al colonialismo que se convirtió en arte universal.'",
+        imagen: "gueguense_carazo.jpg"
+      },
+      {
+        id: "granada",
+        nombre: "Granada",
+        cabecera: "Granada",
+        region: "Pacífico",
+        x: 39.0, y: 73.2,
+        hito: "La Destrucción Filibustera y el Rechazo a 'Here was Granada' (1856)",
+        año: "1856",
+        personajes: "Defensores civiles y tropa centroamericana",
+        sitio: "Fuerte La Pólvora, Iglesia La Merced",
+        relato: "En noviembre de 1856, acorralado por los ejércitos aliados, el general filibustero Henningsen incendió la ciudad colonial de Granada por orden de Walker, clavando una lanza que decía 'Here was Granada'. La ciudad renació de sus cenizas como emblema de resistencia patria.",
+        cita: "'Granada no murió: resurgió con dignidad sobre las cenizas del filibustero.'",
+        imagen: "granada_colonial.jpg"
+      },
+      {
+        id: "rivas",
+        nombre: "Rivas",
+        cabecera: "Rivas",
+        region: "Pacífico",
+        x: 36.6, y: 81.7,
+        hito: "Gesta del Maestro Enmanuel Mongalo y Quema del Mesón (1855)",
+        año: "29 de Junio de 1855",
+        personajes: "Maestro Enmanuel Mongalo y Rubio",
+        sitio: "Mesón de Rivas, Isla de Ometepe",
+        relato: "El 29 de junio de 1855, el maestro de escuela Enmanuel Mongalo y Rubio, con una tea encendida y desafiando el fuego de los rifles enemigos, prendió fuego al mesón donde se atrincheraban las tropas invasoras de William Walker, obligándolas a huir.",
+        cita: "'¡La tea encendida de Mongalo iluminó la soberanía centroamericana!'",
+        imagen: "mongalo_rivas.jpg"
+      },
+      {
+        id: "boaco",
+        nombre: "Boaco",
+        cabecera: "Boaco",
+        region: "Norte y Central",
+        x: 44.5, y: 60.0,
+        hito: "Resistencia Indígena Chontal y Corredor de la Alfabetización",
+        año: "1980",
+        personajes: "Brigadistas de la Cruzada de Alfabetización",
+        sitio: "Puentes históricos y Serranías de Boaco",
+        relato: "Paso natural entre el Pacífico y el Caribe, Boaco albergó comunidades indígenas que resistieron los repartimientos coloniales. En 1980, cientos de brigadistas del EPA cruzaron sus ríos y quebradas para llevar el pan de la enseñanza a las comarcas más aisladas.",
+        cita: "'Puente de esperanza y soberanía educativa en las serranías.'",
+        imagen: "boaco_paisaje.jpg"
+      },
+      {
+        id: "chontales",
+        nombre: "Chontales",
+        cabecera: "Juigalpa",
+        region: "Norte y Central",
+        x: 52.0, y: 68.4,
+        hito: "Guardianes de la Sierra de Amerrisque y Memoria Precolombina",
+        año: "Época Precolombina / Moderna",
+        personajes: "Caciques Chontales, Gregorio Aguilar Barea",
+        sitio: "Cordillera de Amerrisque, Museo Arqueológico de Juigalpa",
+        relato: "Cuna de la impresionante estatuaria lítica de los Chontales, pueblo guerrero e indoblegable que nunca fue totalmente sometido por los conquistadores. Su tradición ganadera y campesina nutrió las filas patrióticas en las luchas libertarias.",
+        cita: "'Nuestros monolitos de piedra dan fe de miles de años de identidad propia.'",
+        imagen: "chontales_estatuas.jpg"
+      },
+      {
+        id: "rio-san-juan",
+        nombre: "Río San Juan",
+        cabecera: "San Carlos",
+        region: "Norte y Central",
+        x: 63.0, y: 85.5,
+        hito: "Defensa Heroica de Rafaela Herrera en el Castillo (1762) y Ruta del Tránsito",
+        año: "29 de Julio de 1762",
+        personajes: "Heroína Nacional Rafaela Herrera",
+        sitio: "Castillo de la Inmaculada Concepción, San Carlos",
+        relato: "A los 19 años de edad, Rafaela Herrera disparó los cañones de la fortaleza fluvial deteniendo una poderosa armada invasora británica que pretendía partir en dos el territorio nicaragüense. En 1977, el Asalto al Cuartel de San Carlos marcó el inicio de la insurrección final.",
+        cita: "'¡Cobardes! ¡Vengan a ver a una mujer que sabe defender su patria!' — Rafaela Herrera",
+        imagen: "castillo_inmaculada.jpg"
+      },
+      {
+        id: "raccn",
+        nombre: "Costa Caribe Norte (RACCN)",
+        cabecera: "Bilwi (Puerto Cabezas)",
+        region: "Costa Caribe",
+        x: 70.5, y: 26.6,
+        hito: "Estatuto de Autonomía (Ley 28) y Soberanía Territorial de Bosawás",
+        año: "1987 – Presente",
+        personajes: "Pueblos Miskitu y Mayangna, Consejos de Ancianos",
+        sitio: "Río Wangki (Coco), Reserva de Bosawás, Bilwi",
+        relato: "La aprobación de la Ley 28 en 1987 consagró la autonomía política, territorial y lingüística de los pueblos originarios de la RACCN. Reconoce sus tierras comunales ancestrales y garantiza la educación intercultural bilingüe en lengua Miskitu y Mayangna.",
+        cita: "'Nicaragua es una patria unida en el respeto sagrado a la diversidad originaria.'",
+        imagen: "pueblos_costa_caribe.jpg"
+      },
+      {
+        id: "raccs",
+        nombre: "Costa Caribe Sur (RACCS)",
+        cabecera: "Bluefields",
+        region: "Costa Caribe",
+        x: 70.5, y: 58.9,
+        hito: "Reconocimiento Multiétnico de Pueblos Creoles, Garífunas y Rama",
+        año: "1987 – Presente",
+        personajes: "Líderes comunales afrodescendientes e indígenas",
+        sitio: "Bahía de Bluefields, Corn Island, Laguna de Perlas",
+        relato: "Crisol de culturas donde confluyen comunidades Creoles, Garífunas, Rama, Mestizas y Miskitus. La RACCS consolidó el derecho de autogobierno regional y la preservación de su invaluable herencia musical, gastronómica y marítima caribeña.",
+        cita: "'Cultura viva, afrodescendencia y soberanía comunal en el Caribe nicaragüense.'",
+        imagen: "mapa_autonomia.jpg"
+      }
+    ];
+
+    // Dilemas de la Trivia
+    const DILEMAS = [
+      {
+        id: 1,
+        trayecto: "Raíces e Independencia (1856)",
+        titulo: "El Asalto Filibustero a San Jacinto",
+        personaje: "Andrés Castro y José Dolores Estrada",
+        contexto: "Septiembre de 1856. William Walker ha proclamado la esclavitud. Atacan San Jacinto con fusiles Minié superiores. Se agotan las municiones.",
+        pregunta: "¿Cuál es tu postura ante la embestida filibustera?",
+        opciones: [
+          { id: "A", texto: "Tomar las piedras del corral y repeler cuerpo a cuerpo al invasor con patriotismo indoblegable.", pts: 100 },
+          { id: "B", texto: "Pactar una tregua temporal con los oficiales de Walker esperando mediación diplomática foránea.", pts: 15 },
+          { id: "C", texto: "Retirarse hacia el norte para preservar vidas y reorganizarse más adelante.", pts: 40 }
+        ]
+      },
+      {
+        id: 2,
+        trayecto: "Antiimperialismo y Dignidad (1927)",
+        titulo: "El Rechazo al Pacto del Espino Negro",
+        personaje: "General Augusto C. Sandino",
+        contexto: "Mayo de 1927, Tipitapa. El enviado Henry Stimson ofrece dinero y cargos a cambio de entregar las armas bajo el árbol de Espino Negro.",
+        pregunta: "Sandino con 29 hombres se niega. ¿Qué decides tú?",
+        opciones: [
+          { id: "A", texto: "Marchar a Las Segovias, fundar el EDSN y resistir hasta expulsar a las tropas invasoras.", pts: 100 },
+          { id: "B", texto: "Aceptar las indemnizaciones económicas y esperar la próxima elección vigilada por marines.", pts: 10 },
+          { id: "C", texto: "Exiliarse en el extranjero para escribir denuncias de prensa sin tomar las armas.", pts: 40 }
+        ]
+      },
+      {
+        id: 3,
+        trayecto: "Resistencia y Revolución (1980)",
+        titulo: "La Gran Cruzada Nacional de Alfabetización",
+        personaje: "Brigadistas del EPA y Carlos Fonseca",
+        contexto: "1980. Más del 50% de la población no sabe leer ni escribir. Se convoca a 95,000 jóvenes a internarse en las montañas durante cinco meses.",
+        pregunta: "¿Cómo se consolida la soberanía tras la victoria popular?",
+        opciones: [
+          { id: "A", texto: "Erradicar el analfabetismo mediante contacto directo pueblo-estudiantes, empoderando al campesinado.", pts: 100 },
+          { id: "B", texto: "Priorizar la industria urbana y delegar la educación a programas de radio de bajo costo.", pts: 40 },
+          { id: "C", texto: "Esperar financiamiento de organismos multilaterales antes de movilizar a la juventud.", pts: 20 }
+        ]
+      },
+      {
+        id: 4,
+        trayecto: "Autonomía de la Costa Caribe (1987)",
+        titulo: "El Estatuto de Autonomía de las Regiones del Caribe",
+        personaje: "Pueblos Miskitu, Mayangna, Rama, Creoles, Garífunas y Mestizos",
+        contexto: "Octubre de 1987. Históricamente la Costa Caribe fue excluida por el centralismo del Pacífico. Se debate la Ley 28 en la Asamblea.",
+        pregunta: "¿Cómo debe concebirse la soberanía en un Estado plurinacional?",
+        opciones: [
+          { id: "A", texto: "Reconocer constitucionalmente la propiedad comunal de las tierras, educación bilingüe y autogobierno regional.", pts: 100 },
+          { id: "B", texto: "Centralizar todas las decisiones en el Pacífico para mantener una administración uniforme.", pts: 15 },
+          { id: "C", texto: "Permitir autonomía comercial a empresas extranjeras sin representación de los consejos regionales.", pts: 25 }
+        ]
+      }
+    ];
+
+    let trayectoActivoIdx = 0;
+    let deptoActivoId = "nueva-segovia";
+    let filtroRegionActual = "Todas";
+    let dilemaActualIdx = 0;
+    let respuestasUsuario = [];
+    let opcionSeleccionada = null;
+
+    // ==========================================
+    // RENDER: MUSEO VIRTUAL
+    // ==========================================
+    function renderTabs() {
+      const container = document.getElementById("contenedor-tabs");
+      container.innerHTML = TRAYECTOS.map((t, idx) => `
+        <div class="tab-card ${idx === trayectoActivoIdx ? 'active' : ''}" onclick="seleccionarTrayecto(${idx})">
+          <span class="tab-badge">Trayecto ${t.numero}</span>
+          <div class="tab-title">${t.nombre}</div>
+          <div class="tab-period">${t.periodo}</div>
+        </div>
+      `).join('');
+    }
+
+    function renderTrayectoDetalle() {
+      const t = TRAYECTOS[trayectoActivoIdx];
+      const container = document.getElementById("detalle-trayecto");
+      container.innerHTML = `
+        <div class="franja-nicaragua" style="position: absolute; top: 0; left: 0; right: 0;"></div>
+        <div style="border-bottom: 2px solid rgba(255,255,255,0.2); padding-bottom: 1rem; margin-top: 0.5rem;">
+          <span style="background: var(--nica-gold); color: #002B59; padding: 0.25rem 0.65rem; border-radius: 6px; font-size: 0.76rem; font-family: monospace; font-weight: 900;">
+            Periodo ${t.periodo}
+          </span>
+          <h2 style="font-family: Georgia, serif; font-size: 2rem; font-weight: 900; color: white; margin-top: 0.5rem;">
+            ${t.nombre}
+          </h2>
+          <p style="color: #93C5FD; font-size: 1rem; font-weight: 600;">${t.subtitulo}</p>
+        </div>
+
+        <div class="quote-box">
+          <p>“${t.cita}”</p>
+          <div class="quote-author">
+            <span>— ${t.citaAutor}</span>
+          </div>
+        </div>
+
+        <div>
+          <h3 style="font-size: 1.05rem; font-weight: 800; color: white; margin-bottom: 0.5rem;">
+            📖 Contexto y Significado Histórico
+          </h3>
+          <p style="color: #E2E8F0; font-size: 0.95rem; line-height: 1.6; background: rgba(0, 34, 74, 0.6); padding: 1.25rem; border-radius: 14px; border: 1px solid rgba(255,255,255,0.1);">${t.descripcion}</p>
+        </div>
+
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+            <h3 style="font-size: 1.05rem; font-weight: 800; color: white;">
+              🖼️ Galería y Evidencia Histórica
+            </h3>
+            <span style="font-size: 0.75rem; color: var(--nica-gold); font-family: monospace; font-weight: 700;">
+              📸 Guarda tus fotos en public/assets/images/
+            </span>
+          </div>
+          <div class="img-grid">
+            ${t.imagenes.map(img => `
+              <div class="img-card">
+                <div style="font-size: 2.2rem; margin-bottom: 0.5rem;">🇳🇮</div>
+                <h4 style="font-size: 1rem; font-weight: 800; color: white;">${img.titulo}</h4>
+                <p style="font-size: 0.82rem; color: #93C5FD; margin-top: 0.25rem;">${img.desc}</p>
+                <div class="img-badge">📸 ${img.archivo}</div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+
+        <div>
+          <h3 style="font-size: 1.05rem; font-weight: 800; color: white; margin-bottom: 0.75rem;">
+            ⏳ Hitos Trascendentales
+          </h3>
+          <div class="hitos-grid">
+            ${t.hitos.map(h => `
+              <div class="hito-card">
+                <span class="hito-year">${h.año}</span>
+                <div style="font-weight: 800; font-size: 0.9rem; color: #002B59;">${h.titulo}</div>
+                <div style="font-size: 0.8rem; color: #334155; margin-top: 0.25rem; font-weight: 500;">${h.desc}</div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+
+        <div style="background: linear-gradient(135deg, var(--nica-blue), #004B91); border: 2px solid var(--nica-gold); border-radius: 16px; padding: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-top: 0.5rem; box-shadow: 0 8px 25px rgba(0,0,0,0.3);">
+          <div>
+            <h4 style="font-weight: 900; color: white; font-size: 1.15rem;">¿Quieres explorar los hechos por departamento?</h4>
+            <p style="font-size: 0.85rem; color: #E2E8F0;">Abre el Mapa Interactivo de Nicaragua.</p>
+          </div>
+          <button class="action-btn" onclick="cambiarVista('mapa')">
+            Explorar Mapa Interactivo ➔
+          </button>
+        </div>
+      `;
+    }
+
+    function seleccionarTrayecto(idx) {
+      trayectoActivoIdx = idx;
+      renderTabs();
+      renderTrayectoDetalle();
+    }
+
+    // ==========================================
+    // RENDER: MAPA INTERACTIVO
+    // ==========================================
+    function filtrarRegion(region) {
+      filtroRegionActual = region;
+      document.querySelectorAll('#vista-mapa [id^="btn-filtro-"]').forEach(btn => btn.classList.remove('active'));
+      const mapaIds = {
+        'Todas': 'btn-filtro-todas',
+        'Pacífico': 'btn-filtro-pacifico',
+        'Norte y Central': 'btn-filtro-norte',
+        'Costa Caribe': 'btn-filtro-caribe'
+      };
+      if (document.getElementById(mapaIds[region])) {
+        document.getElementById(mapaIds[region]).classList.add('active');
+      }
+      renderMapa();
+    }
+
+    function renderMapa() {
+      const containerPines = document.getElementById("contenedor-pines-mapa");
+      const containerLista = document.getElementById("lista-deptos-botones");
+
+      const deptosFiltrados = filtroRegionActual === 'Todas'
+        ? DEPARTAMENTOS
+        : DEPARTAMENTOS.filter(d => d.region === filtroRegionActual);
+
+      // Render pines en el mapa
+      containerPines.innerHTML = DEPARTAMENTOS.map(d => {
+        const esActivo = d.id === deptoActivoId;
+        const visible = filtroRegionActual === 'Todas' || d.region === filtroRegionActual;
+
+        return `
+          <button 
+            class="map-pin ${esActivo ? 'active' : ''}" 
+            style="left: ${d.x}%; top: ${d.y}%; opacity: ${visible ? '1' : '0.25'};"
+            onclick="seleccionarDepto('${d.id}')"
+            title="${d.nombre} (${d.cabecera})"
+          >
+            <div class="pin-circle">★</div>
+          </button>
+        `;
+      }).join('');
+
+      // Render botones de acceso rápido
+      containerLista.innerHTML = deptosFiltrados.map(d => `
+        <button 
+          style="padding: 0.3rem 0.6rem; border-radius: 6px; font-size: 0.72rem; font-weight: 800; cursor: pointer; border: 1px solid rgba(255,255,255,0.2); transition: all 0.2s; ${
+            d.id === deptoActivoId 
+              ? 'background: var(--nica-gold); color: #002B59;' 
+              : 'background: #001D3D; color: white;'
+          }"
+          onclick="seleccionarDepto('${d.id}')"
+        >
+          ${d.nombre}
+        </button>
+      `).join('');
+
+      renderDeptoDetalle();
+    }
+
+    function seleccionarDepto(id) {
+      deptoActivoId = id;
+      renderMapa();
+    }
+
+    function renderDeptoDetalle() {
+      const d = DEPARTAMENTOS.find(x => x.id === deptoActivoId) || DEPARTAMENTOS[0];
+      const panel = document.getElementById("panel-depto-detalle");
+
+      panel.innerHTML = `
+        <div class="franja-nicaragua" style="position: absolute; top: 0; left: 0; right: 0;"></div>
+        
+        <div style="border-bottom: 2px solid rgba(255,255,255,0.2); padding-bottom: 0.75rem; margin-top: 0.5rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.25rem;">
+            <span style="background: var(--nica-gold); color: #002B59; padding: 0.2rem 0.6rem; border-radius: 50px; font-size: 0.72rem; font-weight: 900;">
+              ${d.region}
+            </span>
+            <span style="font-size: 0.78rem; color: #93C5FD; font-weight: 700;">
+              Cabecera: <strong style="color: white;">${d.cabecera}</strong>
+            </span>
+          </div>
+          <h2 style="font-family: Georgia, serif; font-size: 1.85rem; font-weight: 900; color: white;">
+            ${d.nombre}
+          </h2>
+        </div>
+
+        <div style="background: white; color: #002B59; border-left: 8px solid var(--nica-blue); padding: 1rem; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+          <div style="display: flex; justify-content: space-between; font-size: 0.72rem; font-weight: 900; color: var(--nica-blue); margin-bottom: 0.25rem;">
+            <span>⚔️ HITO HISTÓRICO DE SOBERANÍA</span>
+            <span style="background: #EBF4FD; padding: 0.1rem 0.5rem; border-radius: 4px;">${d.año}</span>
+          </div>
+          <h3 style="font-size: 0.95rem; font-weight: 900; line-height: 1.3;">
+            ${d.hito}
+          </h3>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr; gap: 0.6rem; font-size: 0.78rem;">
+          <div style="background: #002B59; padding: 0.75rem; border-radius: 10px; border: 1px solid rgba(255,255,255,0.1);">
+            <strong style="color: var(--nica-gold); display: block; margin-bottom: 0.2rem;">👤 Héroes y Protagonistas:</strong>
+            <span style="color: white; font-weight: 600;">${d.personajes}</span>
+          </div>
+          <div style="background: #002B59; padding: 0.75rem; border-radius: 10px; border: 1px solid rgba(255,255,255,0.1);">
+            <strong style="color: #60A5FA; display: block; margin-bottom: 0.2rem;">🏛️ Sitio Emblemático:</strong>
+            <span style="color: white; font-weight: 600;">${d.sitio}</span>
+          </div>
+        </div>
+
+        <div style="background: rgba(0, 34, 74, 0.6); padding: 1rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.15);">
+          <strong style="color: var(--nica-gold); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 0.4rem;">
+            📖 Memoria y Significado Histórico:
+          </strong>
+          <p style="color: #E2E8F0; font-size: 0.85rem; line-height: 1.6; font-weight: 500;">
+            ${d.relato}
+          </p>
+        </div>
+
+        ${d.cita ? `
+          <blockquote style="background: rgba(255,255,255,0.1); border-left: 4px solid var(--nica-gold); padding: 0.75rem; border-radius: 8px; font-size: 0.8rem; font-style: italic; font-family: Georgia, serif; color: #EBF4FD;">
+            ${d.cita}
+          </blockquote>
+        ` : ''}
+
+        <div class="img-card" style="padding: 1rem;">
+          <h4 style="font-size: 0.85rem; font-weight: 800; color: white;">Registro Gráfico de ${d.nombre}</h4>
+          <p style="font-size: 0.75rem; color: #93C5FD; margin-top: 0.2rem;">${d.sitio}</p>
+          <div class="img-badge" style="font-size: 0.7rem; padding: 0.2rem 0.5rem;">📸 ${d.imagen}</div>
+        </div>
+      `;
+    }
+
+    // ==========================================
+    // RENDER: TRIVIA / LÍNEA DE DECISIONES
+    // ==========================================
+    function renderTrivia() {
+      const q = DILEMAS[dilemaActualIdx];
+      const container = document.getElementById("contenedor-trivia");
+      const esUltima = dilemaActualIdx === DILEMAS.length - 1;
+
+      container.innerHTML = `
+        <div class="franja-nicaragua" style="position: absolute; top: 0; left: 0; right: 0;"></div>
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid rgba(255,255,255,0.2); padding-bottom: 1rem; margin-bottom: 1.25rem; margin-top: 0.5rem;">
+          <span style="font-size: 0.78rem; color: var(--nica-gold); font-weight: 900; text-transform: uppercase;">
+            👤 Protagonistas: ${q.personaje}
+          </span>
+          <span style="font-size: 0.85rem; font-family: monospace; color: #93C5FD; font-weight: 800;">
+            Dilema ${dilemaActualIdx + 1} de ${DILEMAS.length}
+          </span>
+        </div>
+
+        <h2 style="font-family: Georgia, serif; font-size: 1.55rem; font-weight: 900; color: white; margin-bottom: 0.75rem;">
+          ${q.titulo}
+        </h2>
+
+        <div style="background: white; color: #002B59; border-left: 8px solid var(--nica-blue); padding: 1rem 1.2rem; border-radius: 12px; font-size: 0.9rem; margin-bottom: 1rem; box-shadow: 0 4px 10px rgba(0,0,0,0.15); font-weight: 500;">
+          <strong style="color: var(--nica-blue); display: block; margin-bottom: 0.25rem; font-weight: 900;">Situación Crítica:</strong>
+          ${q.contexto}
+        </div>
+
+        <div style="background: var(--nica-blue); border-radius: 12px; padding: 0.85rem; text-align: center; margin-bottom: 1.25rem; font-weight: 800; color: white; font-size: 1rem; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
+          ${q.pregunta}
+        </div>
+
+        <div id="opciones-lista">
+          ${q.opciones.map(op => `
+            <div class="opcion-btn ${opcionSeleccionada === op.id ? 'selected' : ''}" onclick="seleccionarOpcion('${op.id}')">
+              <span class="opcion-num">${op.id}</span>
+              <span style="font-size: 0.92rem; font-weight: 600;">${op.texto}</span>
+            </div>
+          `).join('')}
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1.5rem; padding-top: 1rem; border-top: 2px solid rgba(255,255,255,0.2);">
+          <button class="btn-nav" style="border: 2px solid rgba(255,255,255,0.3);" onclick="anteriorDilema()" ${dilemaActualIdx === 0 ? 'disabled style="opacity: 0.3;"' : ''}>
+            ← Anterior
+          </button>
+          <button class="action-btn" onclick="siguienteDilema()" ${!opcionSeleccionada ? 'disabled style="opacity: 0.4; cursor: not-allowed;"' : ''}>
+            ${esUltima ? 'Finalizar y Revelar Nivel ➔' : 'Siguiente Dilema ➔'}
+          </button>
+        </div>
+      `;
+    }
+
+    function seleccionarOpcion(id) {
+      opcionSeleccionada = id;
+      renderTrivia();
+    }
+
+    function anteriorDilema() {
+      if (dilemaActualIdx > 0) {
+        dilemaActualIdx--;
+        const guardada = respuestasUsuario.find(r => r.pregunta_id === DILEMAS[dilemaActualIdx].id);
+        opcionSeleccionada = guardada ? guardada.opcion_id : null;
+        renderTrivia();
+      }
+    }
+
+    function siguienteDilema() {
+      if (!opcionSeleccionada) return;
+
+      const q = DILEMAS[dilemaActualIdx];
+      respuestasUsuario = respuestasUsuario.filter(r => r.pregunta_id !== q.id);
+      respuestasUsuario.push({ pregunta_id: q.id, opcion_id: opcionSeleccionada });
+
+      if (dilemaActualIdx === DILEMAS.length - 1) {
+        enviarResultados();
+      } else {
+        dilemaActualIdx++;
+        const guardada = respuestasUsuario.find(r => r.pregunta_id === DILEMAS[dilemaActualIdx]?.id);
+        opcionSeleccionada = guardada ? guardada.opcion_id : null;
+        renderTrivia();
+      }
+    }
+
+    async function enviarResultados() {
+      const container = document.getElementById("contenedor-trivia");
+      container.innerHTML = `<div style="text-align: center; padding: 3rem;"><p style="font-size: 1.25rem; color: var(--nica-gold); font-weight: 900;">Evaluando tu Nivel de Apropiación Soberana...</p></div>`;
+
+      try {
+        const res = await fetch("/api/respuestas", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            respuestas: respuestasUsuario,
+            dispositivo: window.innerWidth < 768 ? "Móvil Visitante" : "Laptop Stand"
+          })
+        });
+        if (res.ok) {
+          const data = await res.json();
+          mostrarResultado(data.resultado, data.metricas_globales);
+          return;
+        }
+      } catch (e) {
+        console.warn("Modo offline local:", e);
+      }
+
+      let totalPuntos = 0;
+      respuestasUsuario.forEach(r => {
+        const d = DILEMAS.find(x => x.id === r.pregunta_id);
+        const op = d ? d.opciones.find(o => o.id === r.opcion_id) : null;
+        if (op) totalPuntos += op.pts;
+      });
+      const pct = Math.round(totalPuntos / (DILEMAS.length * 100) * 100);
+      mostrarResultado({
+        porcentaje: pct,
+        arquetipo: pct >= 80 ? "Centinela de la Dignidad Nacional" : "Defensor de la Memoria Colectiva",
+        subtitulo: "Conciencia Histórica Soberana Activa",
+        descripcion: "Tus decisiones reafirman la valentía de Zeledón, Sandino y la heroicidad de San Jacinto."
+      }, null);
+    }
+
+    function mostrarResultado(res, metricas) {
+      const container = document.getElementById("contenedor-trivia");
+      container.innerHTML = `
+        <div class="franja-nicaragua" style="position: absolute; top: 0; left: 0; right: 0;"></div>
+        <div style="text-align: center; padding-top: 1rem;">
+          <div style="font-size: 3.5rem; margin-bottom: 0.5rem;">🇳🇮</div>
+          <span class="badge-patria" style="background: white; color: var(--nica-blue); border: 2px solid var(--nica-blue);">Nivel de Apropiación Soberana</span>
+          
+          <div style="font-size: 4.8rem; font-family: Georgia, serif; font-weight: 900; color: var(--nica-gold); margin: 0.5rem 0; text-shadow: 0 4px 15px rgba(229,168,35,0.4);">
+            ${res.porcentaje}%
+          </div>
+
+          <h2 style="font-family: Georgia, serif; font-size: 1.9rem; font-weight: 900; color: white;">
+            ${res.arquetipo}
+          </h2>
+          <p style="color: #93C5FD; font-weight: 700; font-size: 1rem; margin-top: 0.25rem;">
+            ${res.subtitulo}
+          </p>
+          <p style="color: #FFFFFF; font-size: 0.95rem; max-width: 620px; margin: 1rem auto; line-height: 1.6; background: rgba(0, 34, 74, 0.6); padding: 1rem; border-radius: 14px; border: 1px solid rgba(255,255,255,0.15);">
+            ${res.descripcion}
+          </p>
+
+          ${metricas && metricas.total_participantes ? `
+            <div style="background: white; color: #002B59; border: 2px solid var(--nica-blue); border-radius: 14px; padding: 0.85rem 1.75rem; display: inline-flex; gap: 2.5rem; margin: 1rem auto; font-size: 0.85rem; font-weight: 800; box-shadow: 0 6px 18px rgba(0,0,0,0.2);">
+              <div>
+                <strong style="color: var(--nica-blue); font-size: 1.3rem; display: block;">${metricas.total_participantes}</strong>
+                <span>Visitantes en la Feria</span>
+              </div>
+              <div style="width: 2px; background: #E2E8F0;"></div>
+              <div>
+                <strong style="color: var(--nica-gold); font-size: 1.3rem; display: block;">${metricas.promedio_soberania}%</strong>
+                <span>Promedio General</span>
+              </div>
+            </div>
+          ` : ''}
+
+          <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 2rem;">
+            <button class="btn-nav" style="border: 2px solid #FFFFFF; background: white; color: var(--nica-blue);" onclick="reiniciarTrivia()">
+              🔄 Reintentar
+            </button>
+            <button class="action-btn" onclick="cambiarVista('museo')">
+              🏛️ Volver al Museo
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    function reiniciarTrivia() {
+      dilemaActualIdx = 0;
+      respuestasUsuario = [];
+      opcionSeleccionada = null;
+      renderTrivia();
+    }
+
+    // ==========================================
+    // CAMBIO DE VISTAS (SPA ROUTING)
+    // ==========================================
+    function cambiarVista(vista) {
+      document.getElementById("vista-museo").style.display = vista === 'museo' ? 'block' : 'none';
+      document.getElementById("vista-mapa").style.display = vista === 'mapa' ? 'block' : 'none';
+      document.getElementById("vista-trivia").style.display = vista === 'trivia' ? 'block' : 'none';
+
+      document.getElementById("btn-nav-museo").classList.toggle('active', vista === 'museo');
+      document.getElementById("btn-nav-mapa").classList.toggle('active', vista === 'mapa');
+      document.getElementById("btn-nav-trivia").classList.toggle('active', vista === 'trivia');
+
+      if (vista === 'mapa') {
+        renderMapa();
+      } else if (vista === 'trivia' && !opcionSeleccionada && respuestasUsuario.length === 0) {
+        renderTrivia();
+      }
+    }
+
+    function abrirModalQR() {
+      fetch('/api/info-red')
+        .then(r => r.json())
+        .then(data => {
+          document.getElementById("img-qr-modal").src = data.qr_base64;
+          document.getElementById("txt-url-modal").textContent = data.url_acceso;
+          document.getElementById("modal-qr").classList.add("open");
+        })
+        .catch(() => {
+          document.getElementById("modal-qr").classList.add("open");
+        });
+    }
+
+    function cerrarModalQR() {
+      document.getElementById("modal-qr").classList.remove("open");
+    }
+
+    // Inicialización al cargar la página
+    renderTabs();
+    renderTrayectoDetalle();
+  </script>
+</body>
+</html>

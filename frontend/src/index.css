@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    background-color: #00224A;
+    color: #FFFFFF;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+}
+
+/* Franja tricolor de la Bandera de Nicaragua (Azul, Blanco, Azul) */
+.franja-nicaragua {
+  height: 6px;
+  background: linear-gradient(
+    to bottom,
+    #0067C6 0%,
+    #0067C6 33.3%,
+    #FFFFFF 33.3%,
+    #FFFFFF 66.6%,
+    #0067C6 66.6%,
+    #0067C6 100%
+  );
+  width: 100%;
+}
+
+.franja-nicaragua-vertical {
+  width: 8px;
+  background: linear-gradient(
+    to right,
+    #0067C6 0%,
+    #0067C6 33.3%,
+    #FFFFFF 33.3%,
+    #FFFFFF 66.6%,
+    #0067C6 66.6%,
+    #0067C6 100%
+  );
+}
+
+/* Scrollbar patriótica en azul y blanco de Nicaragua */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #00224A;
+}
+::-webkit-scrollbar-thumb {
+  background: #0067C6;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #E5A823;
+}
+
+/* Efecto de fondo oficial de Nicaragua: Azul Cobalto y Lago Xolotlán */
+.bg-mesh-soberania {
+  background: 
+    radial-gradient(at 10% 15%, rgba(0, 103, 198, 0.45) 0px, transparent 60%),
+    radial-gradient(at 90% 85%, rgba(229, 168, 35, 0.2) 0px, transparent 50%),
+    radial-gradient(at 50% 50%, rgba(0, 75, 145, 0.5) 0px, transparent 70%),
+    linear-gradient(180deg, #001B3A 0%, #002957 50%, #001936 100%);
+  background-attachment: fixed;
+}

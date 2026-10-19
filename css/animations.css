@@ -1,0 +1,152 @@
+/* ==============================================================================
+   Ecos de Soberanía - Micro-Animaciones y Efectos Visuales
+   Diseñado para feedback háptico-visual en stands de feria universitaria
+   ============================================================================== */
+
+/* 1. Canvas de Partículas (Overlay superior para Confetti) */
+.quiz-canvas-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* 2. Destello de Acierto (Flash Correct) */
+@keyframes flashCorrectPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+    border-color: #10b981;
+  }
+  50% {
+    box-shadow: 0 0 40px 10px rgba(16, 185, 129, 0.4);
+    border-color: #34d399;
+  }
+  100% {
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.6);
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+}
+
+.flash-correct {
+  animation: flashCorrectPulse 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* 3. Destello de Error (Flash Incorrect) */
+@keyframes flashIncorrectPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+    border-color: #ef4444;
+  }
+  50% {
+    box-shadow: 0 0 40px 10px rgba(239, 68, 68, 0.4);
+    border-color: #f87171;
+  }
+  100% {
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.6);
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+}
+
+.flash-incorrect {
+  animation: flashIncorrectPulse 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* 4. Sacudida de Error (Shake Animation) */
+@keyframes shakeEffect {
+  0%, 100% { transform: translateX(0); }
+  15%, 45%, 75% { transform: translateX(-8px); }
+  30%, 60%, 90% { transform: translateX(8px); }
+}
+
+.shake-animation {
+  animation: shakeEffect 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+/* 5. Alerta de Temporizador (Poco Tiempo) */
+.timer-warning {
+  background: #f59e0b !important;
+}
+
+@keyframes dangerPulse {
+  0%, 100% {
+    background: #ef4444;
+    box-shadow: 0 0 8px rgba(239, 68, 68, 0.8);
+  }
+  50% {
+    background: #b91c1c;
+    box-shadow: 0 0 18px rgba(239, 68, 68, 1);
+  }
+}
+
+.timer-danger {
+  animation: dangerPulse 0.5s infinite alternate !important;
+}
+
+/* 6. Botón con Pulso de Llamado a la Acción (CTA Pulse) */
+@keyframes buttonPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(0, 102, 214, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 15px rgba(0, 102, 214, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(0, 102, 214, 0);
+  }
+}
+
+.btn-pulse {
+  animation: buttonPulse 2s infinite cubic-bezier(0.66, 0, 0, 1);
+}
+
+/* 7. Transiciones de Entrada Suaves */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes scaleUp {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.animate-scale-up {
+  animation: scaleUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.02);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.animate-bounce {
+  animation: bounceIn 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}

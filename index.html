@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <meta name="theme-color" content="#0a192f" />
+  <meta name="description" content="Ecos de Soberanía: Museo digital interactivo y trivia sobre la memoria histórica de Nicaragua para la Feria de Ingeniería de Sistemas - UNI." />
+  
+  <!-- PWA & Apple Touch Config -->
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="assets/icons/icon-192.png" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+  <title>Ecos de Soberanía | Museo Digital UNI</title>
+
+  <!-- Hojas de Estilo -->
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+</head>
+<body>
+
+  <!-- 1. Barra de Progreso de Lectura Superior Fija -->
+  <div class="scroll-progress-container" aria-hidden="true">
+    <div id="scroll-progress-bar" class="scroll-progress-fill"></div>
+  </div>
+
+  <!-- 2. Header Principal y Estado de Red -->
+  <header class="main-header">
+    <div class="brand-wrapper">
+      <span class="uni-badge">UNI - Sistemas</span>
+      <h1 class="app-title">Ecos de Soberanía</h1>
+    </div>
+    <div class="header-tools">
+      <span id="network-status-badge" class="status-badge status-online">
+        Cargando estado...
+      </span>
+    </div>
+  </header>
+
+  <main>
+    <!-- 3. Sección Hero -->
+    <section class="hero-section">
+      <span class="hero-tag">Memoria Histórica & Soberanía Nacional</span>
+      <h2 class="hero-title">
+        Las Voces que Forjaron la <span class="highlight">Dignidad de Nicaragua</span>
+      </h2>
+      <p class="hero-description">
+        Explora la galería interactiva sobre los momentos cumbre de nuestra soberanía nacional 
+        y pon a prueba tus conocimientos en la Línea de Decisiones Soberanas.
+      </p>
+    </section>
+
+    <!-- 4. Galería Horizontal Táctil (Timeline) -->
+    <section class="timeline-section" aria-label="Línea del tiempo histórica">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">Galería de Momentos Cumbre</h2>
+          <p class="section-subtitle">Desliza o usa los controles táctiles para recorrer la historia</p>
+        </div>
+        <div class="gallery-nav-controls">
+          <button id="gallery-prev-btn" class="btn-nav-arrow" aria-label="Hito anterior">←</button>
+          <button id="gallery-next-btn" class="btn-nav-arrow" aria-label="Siguiente hito">→</button>
+        </div>
+      </div>
+
+      <!-- Contenedor con Scroll Snap y Drag Táctil -->
+      <div id="timeline-container" class="timeline-container">
+        <div id="timeline-track" class="timeline-track">
+          <!-- Las tarjetas de hitos se renderizan dinámicamente desde data.js -->
+        </div>
+      </div>
+
+      <!-- Indicadores de posición (Dots) -->
+      <div id="gallery-dots-container" class="gallery-dots-container"></div>
+    </section>
+
+    <!-- 5. Trivia: Línea de Decisiones Soberanas (Mount Point) -->
+    <section class="quiz-section" aria-label="Trivia interactiva">
+      <div id="quiz-mount-point">
+        <!-- El State Machine del Quiz se renderiza reactivamente aquí -->
+      </div>
+    </section>
+  </main>
+
+  <!-- 6. Modal de Detalle Histórico -->
+  <div id="history-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-sheet">
+      <button id="modal-close-btn" class="modal-close-btn" aria-label="Cerrar detalle">✕</button>
+      <div id="modal-body-content" class="modal-body-content">
+        <!-- Se inyecta dinámicamente el contenido del hito histórico -->
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. Módulos ES6 -->
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
