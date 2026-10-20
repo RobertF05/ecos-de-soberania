@@ -7,7 +7,7 @@ import { MapaInteractivo } from './views/MapaInteractivo';
 import { EscudoNacionalIcon, GuardabarrancoIcon, SacuanjocheIcon, SandinoSiluetaIcon, BanderaNicaraguaBadge } from './components/NicaraguaSymbols';
 
 export function App() {
-  const [vistaActual, setVistaActual] = useState('museo'); // 'museo' | 'mapa' | 'trivia'
+  const [vistaActual, setVistaActual] = useState('mapa'); // 'museo' | 'mapa' | 'trivia'
   const [modalQRAbierto, setModalQRAbierto] = useState(false);
   const [ipInfo, setIpInfo] = useState({
     ip_local: '127.0.0.1',
