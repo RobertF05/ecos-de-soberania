@@ -4,6 +4,7 @@ import { QRModal } from './components/QRModal';
 import { Museo } from './views/Museo';
 import { Trivia } from './views/Trivia';
 import { MapaInteractivo } from './views/MapaInteractivo';
+import { PruebaConocimientos } from './views/PruebaConocimientos';
 import { EscudoNacionalIcon, GuardabarrancoIcon, SacuanjocheIcon, SandinoSiluetaIcon, BanderaNicaraguaBadge } from './components/NicaraguaSymbols';
 
 export function App() {
@@ -48,6 +49,10 @@ export function App() {
 
         {vistaActual === 'trivia' && (
           <Trivia onVolverAlMuseo={() => setVistaActual('museo')} />
+        )}
+
+        {vistaActual === 'prueba' && (
+          <PruebaConocimientos />
         )}
       </main>
 

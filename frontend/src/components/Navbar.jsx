@@ -74,6 +74,19 @@ export const Navbar = ({ vistaActual, setVistaActual, abrirModalQR, ipInfo }) =>
               <span className="sm:hidden">Trivia</span>
             </button>
 
+            <button
+              onClick={() => setVistaActual('prueba')}
+              className={`px-3 sm:px-4 py-2 rounded-xl font-bold text-xs sm:text-sm transition-all duration-200 flex items-center gap-1.5 ${
+                vistaActual === 'prueba'
+                  ? 'bg-white text-[#0067C6] shadow-md scale-105'
+                  : 'text-white hover:bg-white/15'
+              }`}
+            >
+              <span>🧠</span>
+              <span className="hidden sm:inline">Prueba tus Conocimientos</span>
+              <span className="sm:hidden">Prueba</span>
+            </button>
+
             {/* Botón QR en Dorado del Escudo Nacional */}
             <button
               onClick={abrirModalQR}
