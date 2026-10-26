@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Crucigrama } from "../components/actividades/Crucigrama";
 import { VerdaderoFalso } from "../components/actividades/VerdaderoFalso";
+import { CompleteFrase } from "../components/actividades/CompleteFrase"; // Importación del nuevo minijuego
 
 export const PruebaConocimientos = () => {
   const [actividadActual, setActividadActual] = useState(null); // null | 'crucigrama' | 'vf' | 'frase'
@@ -49,30 +50,15 @@ export const PruebaConocimientos = () => {
             <button
               key={t.id}
               onClick={() => setActividadActual(t.id)}
-              disabled={t.id === "frase"} // Deshabilitado temporalmente
-              className={`relative overflow-hidden rounded-2xl p-6 text-left transition-all duration-300 shadow-sm border group
-                ${
-                  t.id === "frase"
-                    ? "bg-slate-50/50 border-slate-200 opacity-60 cursor-not-allowed"
-                    : "bg-white/60 backdrop-blur-sm border-slate-200 hover:bg-white/95 hover:border-sky-300 hover:shadow-md hover:-translate-y-1"
-                }`}
+              className="relative overflow-hidden rounded-2xl p-6 text-left transition-all duration-300 shadow-sm border group bg-white/60 backdrop-blur-sm border-slate-200 hover:bg-white/95 hover:border-sky-300 hover:shadow-md hover:-translate-y-1"
             >
               <div className="text-4xl mb-4 group-hover:scale-110 transition-transform origin-left">
                 {t.icon}
               </div>
-              <h3
-                className={`text-xl font-extrabold mb-2 transition-colors ${t.id === "frase" ? "text-slate-500" : "text-sky-900"}`}
-              >
+              <h3 className="text-xl font-extrabold mb-2 transition-colors text-sky-900">
                 {t.titulo}
               </h3>
               <p className="text-sm text-slate-600 font-medium">{t.desc}</p>
-
-              {/* Etiqueta de "Próximamente" con diseño neutral */}
-              {t.id === "frase" && (
-                <span className="absolute top-4 right-4 bg-slate-100 text-slate-500 border border-slate-200 text-[10px] font-bold px-2.5 py-1 rounded-md uppercase tracking-wider">
-                  Próximamente
-                </span>
-              )}
             </button>
           ))}
         </div>
@@ -89,6 +75,7 @@ export const PruebaConocimientos = () => {
           <div className="min-h-[400px]">
             {actividadActual === "crucigrama" && <Crucigrama />}
             {actividadActual === "vf" && <VerdaderoFalso />}
+            {actividadActual === "frase" && <CompleteFrase />}
           </div>
         </div>
       )}
