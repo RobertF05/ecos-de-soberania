@@ -104,7 +104,9 @@ export const Crucigrama = () => {
 
   const renderPistaList = (filtroDir, tipo) => (
     <div className="space-y-2 mb-6">
-      <h4 className="font-bold text-[#E5A823] uppercase text-sm border-b border-[#0067C6]/50 pb-1 mb-2">{tipo}</h4>
+      <h4 className="font-extrabold text-sky-800 uppercase text-xs tracking-wider border-b border-slate-200 pb-1.5 mb-2.5 shadow-sm">
+        {tipo}
+      </h4>
       {palabrasData.filter(p => p.dir === filtroDir).sort((a, b) => a.num - b.num).map((p) => {
         const isCompleted = respuestasCorrectas[p.id];
         const isActive = pistaActiva?.id === p.id;
@@ -117,13 +119,17 @@ export const Crucigrama = () => {
               setError(false);
             }}
             disabled={isCompleted}
-            className={`w-full text-left p-1.5 rounded text-xs sm:text-sm transition-all flex gap-2
-              ${isCompleted ? 'bg-green-900/40 text-green-200 opacity-60 line-through cursor-default'
-              : isActive ? 'bg-[#0067C6] text-white ring-1 ring-white shadow-lg'
-              : 'hover:bg-[#0067C6]/40 text-blue-100'}`}
+            className={`w-full text-left p-2 rounded-lg text-xs sm:text-sm transition-all duration-200 flex gap-2 border
+              ${isCompleted 
+                ? 'bg-emerald-50/50 border-emerald-100 text-emerald-700/60 line-through cursor-default'
+                : isActive 
+                  ? 'bg-white border-sky-400 text-sky-800 shadow-md scale-[1.02]'
+                  : 'bg-slate-50/50 border-slate-200 hover:bg-white hover:border-sky-300 text-slate-700'}`}
           >
-            <span className="font-bold min-w-[15px]">{p.num}.</span>
-            <span>{p.pista}</span>
+            <span className={`font-black min-w-[15px] ${isCompleted ? 'text-emerald-700/60' : isActive ? 'text-sky-700' : 'text-slate-500'}`}>
+              {p.num}.
+            </span>
+            <span className="font-medium leading-relaxed">{p.pista}</span>
           </button>
         );
       })}
@@ -131,24 +137,24 @@ export const Crucigrama = () => {
   );
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 h-auto lg:h-[calc(100vh-200px)] min-h-[500px]">
+    <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 h-auto lg:h-[calc(100vh-200px)] min-h-[500px] text-slate-800">
 
       {/* PANEL IZQUIERDO: Pistas */}
-      <div className="bg-[#001B3A] p-3 rounded-xl border border-[#0067C6]/30 overflow-y-auto custom-scrollbar h-full">
+      <div className="bg-white/80 backdrop-blur-md p-4 sm:p-5 rounded-2xl border border-slate-200 overflow-y-auto custom-scrollbar h-full shadow-sm">
         {renderPistaList('H', 'Horizontal')}
         {renderPistaList('V', 'Vertical')}
       </div>
 
       {/* PANEL DERECHO: Input arriba + Tablero abajo */}
-      <div className="lg:col-span-2 flex flex-col gap-4 h-full min-h-0">
+      <div className="lg:col-span-2 flex flex-col gap-5 h-full min-h-0">
 
         {/* CAJA DE ENTRADA */}
-        <div className={`p-3 rounded-xl border-2 transition-all duration-300 flex items-center justify-center relative shadow-lg shrink-0
-          ${pistaActiva ? 'bg-[#002B59] border-[#E5A823]' : 'bg-[#001B3A] border-[#0067C6]/30 border-dashed'}`}>
+        <div className={`p-4 rounded-2xl border transition-all duration-300 flex items-center justify-center relative shadow-sm shrink-0
+          ${pistaActiva ? 'bg-white border-sky-400 shadow-md' : 'bg-white/60 backdrop-blur-sm border-slate-200 border-dashed'}`}>
 
           {pistaActiva ? (
             <form onSubmit={verificarRespuesta} className="w-full animate-fade-in z-10">
-              <p className="text-xs sm:text-sm text-center text-[#E5A823] font-bold mb-1">
+              <p className="text-xs sm:text-sm text-center text-sky-900 font-extrabold mb-2.5">
                 {pistaActiva.num}. {pistaActiva.pista}
               </p>
               <div className="flex gap-2 max-w-md mx-auto">
@@ -158,33 +164,35 @@ export const Crucigrama = () => {
                   value={inputValue}
                   onChange={handleInputChange}
                   maxLength={pistaActiva.resp.length}
-                  placeholder="Escribe aquí..."
-                  className={`flex-1 bg-[#001B3A] border-2 text-white px-3 py-1.5 rounded-lg outline-none font-mono uppercase tracking-widest transition-colors text-base
-                    ${error ? 'border-red-500 animate-shake' : 'border-[#0067C6] focus:border-white'}`}
+                  placeholder="Escribe la respuesta..."
+                  className={`flex-1 bg-slate-50 border-2 text-slate-800 px-3 py-2 rounded-xl outline-none font-mono uppercase tracking-widest transition-colors text-base shadow-inner
+                    ${error ? 'border-red-400 bg-red-50 text-red-700 animate-shake' : 'border-slate-300 focus:border-sky-600 focus:bg-white'}`}
                 />
                 <button
                   type="button"
                   onClick={verificarRespuesta}
-                  className="bg-[#0067C6] hover:bg-white hover:text-[#0067C6] text-white font-bold px-4 py-1 rounded-lg transition-colors text-sm"
+                  className="bg-sky-700 hover:bg-sky-800 text-white font-extrabold px-5 py-2 rounded-xl transition-all shadow-sm active:scale-95 text-sm"
                 >
                   Validar
                 </button>
               </div>
             </form>
           ) : (
-            <div className="text-center py-2">
-              <p className="text-blue-200/60 font-medium text-xs sm:text-sm">Selecciona una pista para empezar.</p>
+            <div className="text-center py-4">
+              <p className="text-slate-500 font-medium text-xs sm:text-sm bg-slate-100/50 px-4 py-1.5 rounded-full inline-block border border-slate-200">
+                Selecciona una pista de la izquierda para empezar a escribir.
+              </p>
             </div>
           )}
         </div>
 
         {/* TABLERO DEL CRUCIGRAMA */}
-        <div className="bg-[#001B3A]/80 p-2 sm:p-4 rounded-xl border border-[#0067C6]/50 flex-1 min-h-0 overflow-auto custom-scrollbar relative shadow-inner">
+        <div className="bg-white/95 backdrop-blur-md p-3 sm:p-5 rounded-2xl border border-slate-200 flex-1 min-h-0 overflow-auto custom-scrollbar relative shadow-sm">
 
           {/* m-auto centra sin recortar el contenido cuando hay scroll */}
           <div className="m-auto w-max">
             <div
-              className="inline-grid gap-[2px] bg-[#0067C6]/20 p-1 rounded"
+              className="inline-grid gap-[1px] bg-slate-200 p-1.5 rounded-xl border border-slate-300"
               style={{
                 gridTemplateColumns: `repeat(${maxCols}, 1.5rem)`,
                 gridTemplateRows: `repeat(${maxFilas}, 1.5rem)`
@@ -214,13 +222,15 @@ export const Crucigrama = () => {
                   return (
                     <div
                       key={`${f}-${c}`}
-                      className={`relative w-full h-full flex items-center justify-center border font-black text-xs sm:text-sm transition-all duration-200
-                        ${esParteDePistaActiva ? 'border-[#E5A823] bg-[#003d7a] shadow-[0_0_8px_rgba(229,168,35,0.4)] text-white z-10'
-                        : esParteDePistaCompletada ? 'border-green-500 bg-green-900/50 text-green-300'
-                        : 'border-[#0067C6] bg-[#001B3A] text-white'}`}
+                      className={`relative w-full h-full flex items-center justify-center border font-black text-xs sm:text-sm transition-all duration-200 rounded-[2px]
+                        ${esParteDePistaActiva 
+                          ? 'border-sky-500 bg-sky-50 text-sky-900 shadow-[0_0_8px_rgba(14,165,233,0.4)] z-10'
+                          : esParteDePistaCompletada 
+                            ? 'border-emerald-300 bg-emerald-50 text-emerald-800'
+                            : 'border-slate-300 bg-white text-slate-800'}`}
                     >
                       {numeroInicio && (
-                        <span className="absolute top-0 left-0.5 text-[7px] sm:text-[8px] font-bold text-[#E5A823] leading-none">
+                        <span className={`absolute top-0 left-[2px] text-[7px] sm:text-[8px] font-bold leading-none ${esParteDePistaActiva ? 'text-sky-700' : 'text-slate-400'}`}>
                           {numeroInicio}
                         </span>
                       )}
@@ -237,25 +247,27 @@ export const Crucigrama = () => {
 
       {/* AVISO DE FELICITACIÓN */}
       {mostrarFelicitacion && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4">
-          <div className="bg-[#002B59] border-2 border-[#E5A823] rounded-2xl shadow-2xl p-6 max-w-sm w-full text-center animate-fade-in">
-            <div className="text-5xl mb-2">🎉</div>
-            <h3 className="text-[#E5A823] font-black text-xl mb-2">
-              ¡Felicidades, lo has completado correctamente!
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4">
+          <div className="bg-white border border-slate-200 rounded-3xl shadow-2xl p-8 max-w-sm w-full text-center animate-fade-in relative overflow-hidden">
+            <div className="absolute top-0 left-0 right-0 h-2 bg-emerald-500"></div>
+            
+            <div className="text-5xl mb-3 drop-shadow-sm">🎉</div>
+            <h3 className="text-sky-900 font-black text-2xl mb-3 leading-tight">
+              ¡Felicidades, lo has completado!
             </h3>
-            <p className="text-blue-100 text-sm mb-5">
-              Has resuelto todas las pistas del crucigrama.
+            <p className="text-slate-600 font-medium text-sm mb-6">
+              Has resuelto todas las pistas históricas del crucigrama de soberanía.
             </p>
-            <div className="flex gap-2 justify-center">
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <button
                 onClick={() => setMostrarFelicitacion(false)}
-                className="bg-[#0067C6] hover:bg-white hover:text-[#0067C6] text-white font-bold px-4 py-2 rounded-lg transition-colors text-sm"
+                className="bg-slate-100 hover:bg-slate-200 text-slate-700 font-extrabold px-5 py-2.5 rounded-xl transition-colors text-sm shadow-sm"
               >
                 Cerrar
               </button>
               <button
                 onClick={reiniciar}
-                className="border border-[#E5A823] text-[#E5A823] hover:bg-[#E5A823] hover:text-[#001B3A] font-bold px-4 py-2 rounded-lg transition-colors text-sm"
+                className="bg-sky-700 hover:bg-sky-800 text-white font-extrabold px-5 py-2.5 rounded-xl transition-colors text-sm shadow-sm"
               >
                 Jugar de nuevo
               </button>

@@ -67,7 +67,7 @@ export function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-mesh-soberania flex flex-col font-sans text-white relative overflow-x-hidden">
+    <div className="min-h-screen bg-mesh-soberania flex flex-col font-sans text-white relative overflow-x-hidden mt-10">
       
       {/* Estilos CSS para la física de caída y balanceo de las hojas */}
       <style>{`

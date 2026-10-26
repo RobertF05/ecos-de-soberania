@@ -83,62 +83,96 @@ export const VerdaderoFalso = () => {
 
   if (indiceActual === -1) {
     return (
-      <div className="text-center py-12">
-        <h3 className="text-3xl font-bold text-[#E5A823] mb-4">¡Prueba Completada!</h3>
-        <p className="text-xl text-white mb-6">Tu puntaje: <span className="font-black text-2xl">{puntaje}</span> de {preguntas.length}</p>
-        <button onClick={() => { setIndiceActual(0); setPuntaje(0); setSeleccion(null); setMostrarResultado(false); }} className="bg-[#0067C6] hover:bg-[#0056a6] text-white font-bold py-2 px-6 rounded-lg transition-colors">
-          Intentar de nuevo
+      <div className="text-center py-12 px-6">
+        <div className="text-5xl mb-4 drop-shadow-sm">📜</div>
+        <h3 className="text-2xl font-black text-sky-900 mb-2">Evaluación Completada</h3>
+        <p className="text-lg text-slate-600 mb-8 font-medium">
+          Tu puntaje de precisión histórica: <span className="font-black text-xl text-sky-700">{puntaje}</span> de {preguntas.length}
+        </p>
+        <button 
+          onClick={() => { setIndiceActual(0); setPuntaje(0); setSeleccion(null); setMostrarResultado(false); }} 
+          className="bg-sky-700 hover:bg-sky-800 text-white font-extrabold py-3 px-8 rounded-xl transition-all shadow-sm active:scale-95"
+        >
+          🔄 Intentar de nuevo
         </button>
       </div>
     );
   }
 
   return (
-    <div className="max-w-3xl mx-auto">
-      <div className="flex justify-between items-center mb-6">
-        <span className="text-sm font-bold text-[#E5A823]">Pregunta {indiceActual + 1} de {preguntas.length}</span>
-        <span className="text-sm font-bold text-white">Puntaje: {puntaje}</span>
+    <div className="max-w-3xl mx-auto text-slate-800">
+      
+      {/* Encabezado de Progreso */}
+      <div className="flex justify-between items-center mb-6 px-1">
+        <span className="text-xs font-extrabold text-sky-700 uppercase tracking-wider">
+          Pregunta {indiceActual + 1} de {preguntas.length}
+        </span>
+        <span className="text-xs font-extrabold text-slate-500 uppercase tracking-wider bg-slate-100 px-3 py-1 rounded-full border border-slate-200">
+          Aciertos: <strong className="text-sky-800">{puntaje}</strong>
+        </span>
       </div>
 
-      <div className="bg-[#001B3A] border border-[#0067C6]/50 p-6 rounded-xl mb-6 shadow-inner">
-        <p className="text-lg text-blue-50 leading-relaxed">{preguntaActual.pregunta}</p>
+      {/* Tarjeta de la Pregunta */}
+      <div className="bg-white border border-slate-200 p-6 sm:p-8 rounded-2xl mb-6 shadow-sm relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-1.5 h-full bg-sky-700"></div>
+        <p className="text-base sm:text-lg text-slate-700 leading-relaxed font-serif font-medium pl-2">
+          {preguntaActual.pregunta}
+        </p>
       </div>
 
+      {/* Botones de Selección */}
       <div className="flex gap-4 mb-6">
         <button
           onClick={() => handleRespuesta(true)}
           disabled={mostrarResultado}
-          className={`flex-1 py-3 rounded-xl font-bold text-lg transition-all border-2 
+          className={`flex-1 py-3.5 rounded-2xl font-black text-sm sm:text-base transition-all border-2 shadow-sm
             ${mostrarResultado 
-              ? (preguntaActual.respuesta === true ? 'bg-green-600 border-green-500 text-white' : 'bg-red-900/50 border-red-800 text-red-200 opacity-50') 
-              : 'bg-[#002B59] border-[#0067C6] text-white hover:bg-[#0067C6]'}`}
+              ? (preguntaActual.respuesta === true 
+                  ? 'bg-emerald-50 border-emerald-500 text-emerald-800 scale-[1.02]' 
+                  : 'bg-slate-50 border-slate-200 text-slate-400 opacity-60 cursor-not-allowed') 
+              : 'bg-white border-slate-300 text-slate-700 hover:border-sky-500 hover:text-sky-800 hover:bg-sky-50 active:scale-[0.98]'}`}
         >
           Verdadero
         </button>
         <button
           onClick={() => handleRespuesta(false)}
           disabled={mostrarResultado}
-          className={`flex-1 py-3 rounded-xl font-bold text-lg transition-all border-2 
+          className={`flex-1 py-3.5 rounded-2xl font-black text-sm sm:text-base transition-all border-2 shadow-sm
             ${mostrarResultado 
-              ? (preguntaActual.respuesta === false ? 'bg-green-600 border-green-500 text-white' : 'bg-red-900/50 border-red-800 text-red-200 opacity-50') 
-              : 'bg-[#002B59] border-[#0067C6] text-white hover:bg-[#0067C6]'}`}
+              ? (preguntaActual.respuesta === false 
+                  ? 'bg-emerald-50 border-emerald-500 text-emerald-800 scale-[1.02]' 
+                  : 'bg-slate-50 border-slate-200 text-slate-400 opacity-60 cursor-not-allowed') 
+              : 'bg-white border-slate-300 text-slate-700 hover:border-sky-500 hover:text-sky-800 hover:bg-sky-50 active:scale-[0.98]'}`}
         >
           Falso
         </button>
       </div>
 
+      {/* Retroalimentación y Explicación */}
       {mostrarResultado && (
-        <div className={`p-4 rounded-xl border-l-4 mb-6 ${seleccion === preguntaActual.respuesta ? 'bg-green-900/30 border-green-500' : 'bg-red-900/30 border-red-500'}`}>
-          <p className="font-bold text-white mb-1">
-            {seleccion === preguntaActual.respuesta ? '✅ ¡Correcto!' : '❌ Incorrecto'}
+        <div className={`p-5 rounded-2xl border-l-4 mb-8 shadow-sm animate-fade-in
+          ${seleccion === preguntaActual.respuesta 
+            ? 'bg-emerald-50 border-emerald-500' 
+            : 'bg-red-50 border-red-500'}`}
+        >
+          <p className={`font-black mb-2 flex items-center gap-2 text-sm uppercase tracking-wider
+            ${seleccion === preguntaActual.respuesta ? 'text-emerald-800' : 'text-red-800'}`}
+          >
+            {seleccion === preguntaActual.respuesta ? '✅ Respuesta Correcta' : '❌ Respuesta Incorrecta'}
           </p>
-          <p className="text-sm text-blue-100">{preguntaActual.explicacion}</p>
+          <p className="text-sm text-slate-700 font-medium leading-relaxed">
+            {preguntaActual.explicacion}
+          </p>
         </div>
       )}
 
+      {/* Botón de Continuar */}
       {mostrarResultado && (
-        <button onClick={siguientePregunta} className="w-full bg-[#E5A823] hover:bg-[#F59E0B] text-[#002B59] font-black py-3 rounded-xl transition-colors">
-          {indiceActual === preguntas.length - 1 ? 'Ver Resultados' : 'Siguiente Pregunta →'}
+        <button 
+          onClick={siguientePregunta} 
+          className="w-full bg-sky-800 hover:bg-sky-900 text-white font-extrabold py-3.5 rounded-xl transition-all shadow-md active:scale-[0.98] text-sm uppercase tracking-wider"
+        >
+          {indiceActual === preguntas.length - 1 ? 'Ver Resultados Finales ➔' : 'Siguiente Pregunta ➔'}
         </button>
       )}
     </div>

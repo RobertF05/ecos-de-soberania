@@ -106,16 +106,16 @@ export const VolcanMomotomboIcon = ({ className = "w-8 h-8" }) => (
 );
 
 export const BanderaNicaraguaBadge = () => (
-  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white text-nica-blueDark shadow-md border-2 border-nica-blue text-xs font-bold">
+  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-50 text-sky-900 shadow-sm border border-slate-200 text-xs font-bold">
     {/* Mini Bandera de Nicaragua con sus 3 franjas y escudo central */}
-    <div className="flex flex-col w-6 h-4 rounded overflow-hidden border border-gray-300 shadow-sm shrink-0">
+    <div className="flex flex-col w-6 h-4 rounded overflow-hidden border border-slate-300 shadow-sm shrink-0">
       <div className="h-[33.3%] bg-[#0067C6]"></div>
       <div className="h-[33.4%] bg-[#FFFFFF] flex items-center justify-center">
         <div className="w-1.5 h-1.5 rounded-full bg-[#E5A823]"></div>
       </div>
       <div className="h-[33.3%] bg-[#0067C6]"></div>
     </div>
-    <span className="tracking-wide text-nica-blue font-extrabold uppercase text-[11px]">NICARAGUA</span>
+    <span className="tracking-wide text-sky-800 font-extrabold uppercase text-[11px]">NICARAGUA</span>
   </div>
 );
 
@@ -132,50 +132,54 @@ export const ImagePlaceholder = ({
 
   const renderIcono = () => {
     switch(tipo) {
-      case "sandino": return <SandinoSiluetaIcon className="w-14 h-14" />;
+      case "sandino": return <SandinoSiluetaIcon className="w-12 h-12 opacity-80" />;
       case "independencia": 
-      case "san_jacinto": return <EscudoNacionalIcon className="w-14 h-14" />;
-      case "costa_caribe": return <GuardabarrancoIcon className="w-14 h-14" />;
-      case "revolucion": return <SacuanjocheIcon className="w-14 h-14" />;
-      default: return <VolcanMomotomboIcon className="w-14 h-14" />;
+      case "san_jacinto": return <EscudoNacionalIcon className="w-12 h-12 opacity-80" />;
+      case "costa_caribe": return <GuardabarrancoIcon className="w-12 h-12 opacity-80" />;
+      case "revolucion": return <SacuanjocheIcon className="w-12 h-12 opacity-80" />;
+      default: return <VolcanMomotomboIcon className="w-12 h-12 opacity-80" />;
     }
   };
 
   if (src && !errorCarga) {
     return (
-      <div className={`relative overflow-hidden rounded-2xl border-2 border-nica-blue shadow-lg group ${className}`}>
+      <div className={`relative overflow-hidden rounded-2xl border border-slate-200 shadow-sm group ${className}`}>
         <img 
           src={src} 
           alt={alt} 
           onError={() => setErrorCarga(true)}
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-nica-blueDark via-nica-blueDark/40 to-transparent"></div>
+        {/* Velo oscuro monocromático para legibilidad del texto */}
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-800/50 to-transparent opacity-90"></div>
         <div className="absolute bottom-2 left-3 right-3 text-left">
-          <p className="text-xs font-bold text-nica-gold uppercase tracking-wider">{titulo}</p>
-          <p className="text-[11px] text-white line-clamp-1">{alt}</p>
+          <p className="text-xs font-bold text-sky-100 uppercase tracking-wider">{titulo}</p>
+          <p className="text-[11px] text-slate-200 line-clamp-1">{alt}</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className={`relative overflow-hidden rounded-2xl border-2 border-dashed border-nica-blue bg-gradient-to-b from-[#003B77] to-[#00224A] p-4 flex flex-col items-center justify-center text-center group hover:border-nica-gold transition-all duration-300 shadow-md ${className}`}>
-      {/* Franja superior tricolor de Nicaragua */}
-      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-nica-blue via-white to-nica-blue"></div>
-
-      <div className="mb-2 p-3 rounded-full bg-white/10 border border-white/20 shadow-md">
+    <div className={`relative overflow-hidden rounded-2xl border-2 border-dashed border-slate-300 bg-slate-50/50 p-4 flex flex-col items-center justify-center text-center group hover:border-sky-300 hover:bg-slate-100/50 transition-all duration-300 shadow-sm ${className}`}>
+      
+      {/* Círculo contenedor del icono */}
+      <div className="mb-2 p-3 rounded-full bg-white border border-slate-200 shadow-sm transition-transform group-hover:scale-110">
         {renderIcono()}
       </div>
 
-      <h4 className="text-sm font-bold text-white tracking-wide">{titulo}</h4>
-      <p className="text-xs text-blue-200 mt-0.5 line-clamp-1">{subtitulo}</p>
+      <h4 className="text-sm font-extrabold text-sky-900 tracking-wide">{titulo}</h4>
+      <p className="text-xs text-slate-500 mt-0.5 line-clamp-1 font-medium">{subtitulo}</p>
 
-      <div className="mt-3 px-3 py-1 rounded-md bg-white text-nica-blueDark text-[11px] font-mono font-bold shadow flex items-center gap-1.5">
+      {/* Etiqueta de ruta de archivo */}
+      <div className="mt-3 px-3 py-1.5 rounded-lg bg-white text-slate-600 text-[10px] font-mono font-bold shadow-sm border border-slate-200 flex items-center gap-1.5">
         <span>📸 Archivo:</span>
-        <code className="text-nica-blue font-extrabold">{archivoEsperado}</code>
+        <code className="text-sky-700 font-extrabold">{archivoEsperado}</code>
       </div>
-      <span className="text-[10px] text-blue-200 mt-1">Coloca tu archivo en <code>public/assets/images/</code></span>
+      
+      <span className="text-[9px] text-slate-400 mt-1.5 font-medium uppercase tracking-wider">
+        Coloca tu archivo en public/assets/images/
+      </span>
     </div>
   );
 };

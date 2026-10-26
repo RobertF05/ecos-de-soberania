@@ -17,7 +17,7 @@ export const Navbar = ({ vistaActual, setVistaActual, abrirModalQR, ipInfo }) =>
   };
 
   return (
-    <header className="sticky top-0 z-40 bg-white border-b-2 border-[#0067C6] shadow-sm font-sans text-slate-900 ">
+    <header className="w-full fixed top-0 z-40 bg-white border-b-2 border-[#0067C6] shadow-sm font-sans text-slate-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Altura reducida a h-14 (56px) en móvil y h-16 (64px) en escritorio */}
         <div className="flex items-center justify-between h-14 sm:h-16 gap-4">
@@ -91,9 +91,7 @@ export const Navbar = ({ vistaActual, setVistaActual, abrirModalQR, ipInfo }) =>
                 <path d="M3 3h8v8H3V3zm2 2v4h4V5H5zm8-2h8v8h-8V3zm2 2v4h4V5h-4zM3 13h8v8H3v-8zm2 2v4h4v-4H5zm13-2h3v2h-3v-2zm-3 0h2v3h-2v-3zm3 3h3v2h-3v-2zm-3 3h2v2h-2v-2zm3 0h3v2h-3v-2z" />
               </svg>
               <span>QR LAN</span>
-              <span className="hidden 2xl:inline text-[10px] font-mono opacity-80">
-                ({ipInfo?.ip_local || 'LAN'})
-              </span>
+
             </button>
           </nav>
 
