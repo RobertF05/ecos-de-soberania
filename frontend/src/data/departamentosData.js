@@ -18,7 +18,7 @@ export const DEPARTAMENTOS_DATA = [
     sitioEmblematico: "Mineral de San Albino, Cerro El Chipote",
     relato: "En las escarpadas montañas de Nueva Segovia, Sandino fundó el Ejército Defensor de la Soberanía Nacional con 29 hombres tras rechazar el infame Pacto del Espino Negro. Ocotal fue escenario del primer combate aéreo de la historia militar donde la aviación de los marines bombardeó a la población civil.",
     cita: "'Mi espada tiene por vaina el corazón del opresor.' — General Sandino",
-    imagen: "sandino_general.jpg"
+    imagen: "NuevaSegovia.jpg"
   },
   {
     id: "jinotega",
@@ -34,7 +34,7 @@ export const DEPARTAMENTOS_DATA = [
     sitioEmblematico: "San Rafael del Norte, Montañas de Yalí",
     relato: "San Rafael del Norte fue el centro telegrafista de la revolución patriótica gracias a Blanca Aráuz. Las tupidas selvas y cafetales de Jinotega sirvieron de bastión inexpugnable donde los campesinos resguardaron al EDSN contra las tropas de ocupación extranjera.",
     cita: "'La telegrafista de la patria que comunicó la dignidad nacional.'",
-    imagen: "blanca_arauz.jpg"
+    imagen: "Jinotega.jpeg"
   },
   {
     id: "madriz",
@@ -50,7 +50,7 @@ export const DEPARTAMENTOS_DATA = [
     sitioEmblematico: "Cañón de Somoto, Cerros de Yalagüina",
     relato: "Tierra de arraigo indígena y artesanal, sus cañones y montañas fueron rutas secretas de abastecimiento para las fuerzas defensoras de la soberanía. Sus pobladores mantuvieron viva la identidad norteña y el apoyo logístico al ideario de hombres libres.",
     cita: "'En cada valle segoviano late el pulso de la libertad.'",
-    imagen: "madriz_somoto.jpg"
+    imagen: "Madriz.jpg"
   },
   {
     id: "esteli",
@@ -66,7 +66,7 @@ export const DEPARTAMENTOS_DATA = [
     sitioEmblematico: "Catedral de Estelí, Parque Central",
     relato: "Conocida como 'Tres Veces Heroica', la ciudad de Estelí libró tres épicas batallas insurreccionales contra la Guardia Somocista. Su pueblo combatió casa por casa, demostrando que la unidad popular era capaz de derribar la más férrea tiranía apoyada desde el exterior.",
     cita: "'¡Estelí combativo, tres veces heroico e indestructible!'",
-    imagen: "esteli_insurreccion.jpg"
+    imagen: "Esteli.jpg"
   },
   {
     id: "chinandega",
@@ -82,7 +82,7 @@ export const DEPARTAMENTOS_DATA = [
     sitioEmblematico: "Puerto El Realejo, Volcán San Cristóbal",
     relato: "Desde el virreinato, El Realejo fue uno de los astilleros más estratégicos del Pacífico centroamericano. Chinandega defendió sus costas contra corsarios ingleses y tentativas de invasión foránea que buscaban apoderarse de la salida oceánica nicaragüense.",
     cita: "'Centinela marítimo de nuestro Pacífico soberano.'",
-    imagen: "chinandega_puerto.jpg"
+    imagen: "Chinandega.jpg"
   },
   {
     id: "leon",
@@ -98,7 +98,7 @@ export const DEPARTAMENTOS_DATA = [
     sitioEmblematico: "Casa del Obrero, Fortín de Acosasco",
     relato: "El 21 de septiembre de 1956, el joven poeta Rigoberto López Pérez ajustició al dictador Anastasio Somoza García en la Casa del Obrero, iniciando 'el principio del fin' de la tiranía. En 1979, León fue proclamada la Primera Capital de la Revolución.",
     cita: "'Lo mío no ha sido un sacrificio sino un deber que espero haber cumplido.' — Rigoberto López Pérez",
-    imagen: "leon_fortin.jpg"
+    imagen: "Leon.jpg"
   },
   {
     id: "matagalpa",
@@ -114,7 +114,7 @@ export const DEPARTAMENTOS_DATA = [
     sitioEmblematico: "Casa Cuna de Carlos Fonseca, Cerro Apante",
     relato: "El 11 de septiembre de 1856, 60 indios flecheros marcharon desde Matagalpa armados con arcos y flechas para sumarse a la Batalla de San Jacinto, siendo determinantes en la derrota del filibusterismo. Matagalpa es además la cuna de Carlos Fonseca Amador, fundador del FSLN.",
     cita: "'Y también enséñenles a leer.' — Comandante Carlos Fonseca",
-    imagen: "indios_flecheros.jpg"
+    imagen: "Matagalpa.jpg"
   },
   {
     id: "managua",
@@ -130,7 +130,7 @@ export const DEPARTAMENTOS_DATA = [
     sitioEmblematico: "Hacienda San Jacinto, Plaza de la Revolución",
     relato: "En los llanos de Tipitapa se alza la Hacienda San Jacinto, donde el 14 de septiembre de 1856 Andrés Castro derribó de una pedrada al invasor filibustero. En la capital culminó victoriosa la Ofensiva Final el 19 de julio de 1979 ante una multitud congregada en la Plaza de la Revolución.",
     cita: "'La pedrada de Andrés resuena eterna en la conciencia de la patria.'",
-    imagen: "san_jacinto_batalla.jpg"
+    imagen: "Managua.jpg"
   },
   {
     id: "masaya",
@@ -146,7 +146,7 @@ export const DEPARTAMENTOS_DATA = [
     sitioEmblematico: "Cerro Coyotepe, Comunidad Indígena de Monimbó",
     relato: "En octubre de 1912, el General Benjamín Zeledón defendió la fortaleza de Coyotepe ante el asedio artillero de tropas estadounidenses, prefiriendo morir antes que capitular. En 1978, la comunidad indígena de Monimbó se alzó con bombas de mecate y marimbas contra la dictadura.",
     cita: "'Masaya: ¡Monimbó es Nicaragua!'",
-    imagen: "zeledon_coyotepe.jpg"
+    imagen: "Masaya.jpg"
   },
   {
     id: "carazo",
@@ -162,7 +162,7 @@ export const DEPARTAMENTOS_DATA = [
     sitioEmblematico: "Reloj de Diriamba, Basílica de San Sebastián",
     relato: "En Carazo nació 'El Güegüense o Macho Ratón', drama satírico que mediante el doble sentido burló la autoridad colonial española. Declarado Patrimonio Inmaterial de la Humanidad por la UNESCO, representa el ingenio mestizo en defensa de su autonomía.",
     cita: "'Una burla magistral al colonialismo que se convirtió en arte universal.'",
-    imagen: "gueguense_carazo.jpg"
+    imagen: "Carazo.jpg"
   },
   {
     id: "granada",
@@ -178,7 +178,7 @@ export const DEPARTAMENTOS_DATA = [
     sitioEmblematico: "Fuerte La Pólvora, Iglesia La Merced",
     relato: "En noviembre de 1856, acorralado por los ejércitos aliados, el general filibustero Henningsen incendió la ciudad colonial de Granada por orden de Walker, clavando una lanza que decía 'Here was Granada'. La ciudad renació de sus cenizas como emblema de resistencia patria.",
     cita: "'Granada no murió: resurgió con dignidad sobre las cenizas del filibustero.'",
-    imagen: "granada_colonial.jpg"
+    imagen: "Granada.jpg"
   },
   {
     id: "rivas",
@@ -194,7 +194,7 @@ export const DEPARTAMENTOS_DATA = [
     sitioEmblematico: "Mesón de Rivas, Isla de Ometepe",
     relato: "El 29 de junio de 1855, el maestro de escuela Enmanuel Mongalo y Rubio, con una tea encendida y desafiando el fuego de los rifles enemigos, prendió fuego al mesón donde se atrincheraban las tropas invasoras de William Walker, obligándolas a huir.",
     cita: "'¡La tea encendida de Mongalo iluminó la soberanía centroamericana!'",
-    imagen: "mongalo_rivas.jpg"
+    imagen: "Rivas.jpg"
   },
   {
     id: "boaco",
@@ -210,7 +210,7 @@ export const DEPARTAMENTOS_DATA = [
     sitioEmblematico: "Puentes históricos y Serranías de Boaco",
     relato: "Paso natural entre el Pacífico y el Caribe, Boaco albergó comunidades indígenas que resistieron los repartimientos coloniales. En 1980, cientos de brigadistas del EPA cruzaron sus ríos y quebradas para llevar el pan de la enseñanza a las comarcas más aisladas.",
     cita: "'Puente de esperanza y soberanía educativa en las serranías.'",
-    imagen: "boaco_paisaje.jpg"
+    imagen: "Boaco.jpg"
   },
   {
     id: "chontales",
@@ -226,7 +226,7 @@ export const DEPARTAMENTOS_DATA = [
     sitioEmblematico: "Cordillera de Amerrisque, Museo Arqueológico de Juigalpa",
     relato: "Cuna de la impresionante estatuaria lítica de los Chontales, pueblo guerrero e indoblegable que nunca fue totalmente sometido por los conquistadores. Su tradición ganadera y campesina nutrió las filas patrióticas en las luchas libertarias.",
     cita: "'Nuestros monolitos de piedra dan fe de miles de años de identidad propia.'",
-    imagen: "chontales_estatuas.jpg"
+    imagen: "Chontales.jpg"
   },
   {
     id: "rio-san-juan",
@@ -242,7 +242,7 @@ export const DEPARTAMENTOS_DATA = [
     sitioEmblematico: "Castillo de la Inmaculada Concepción, San Carlos",
     relato: "A los 19 años de edad, Rafaela Herrera disparó los cañones de la fortaleza fluvial deteniendo una poderosa armada invasora británica que pretendía partir en dos el territorio nicaragüense. En 1977, el Asalto al Cuartel de San Carlos marcó el inicio de la insurrección final.",
     cita: "'¡Cobardes! ¡Vengan a ver a una mujer que sabe defender su patria!' — Rafaela Herrera",
-    imagen: "castillo_inmaculada.jpg"
+    imagen: "Rio_San_Juan.jpg"
   },
   {
     id: "raccn",
@@ -258,7 +258,7 @@ export const DEPARTAMENTOS_DATA = [
     sitioEmblematico: "Río Wangki (Coco), Reserva de Bosawás, Bilwi",
     relato: "La aprobación de la Ley 28 en 1987 consagró la autonomía política, territorial y lingüística de los pueblos originarios de la RACCN. Reconoce sus tierras comunales ancestrales y garantiza la educación intercultural bilingüe en lengua Miskitu y Mayangna.",
     cita: "'Nicaragua es una patria unida en el respeto sagrado a la diversidad originaria.'",
-    imagen: "pueblos_costa_caribe.jpg"
+    imagen: "RACCN.jpg"
   },
   {
     id: "raccs",
@@ -274,6 +274,6 @@ export const DEPARTAMENTOS_DATA = [
     sitioEmblematico: "Bahía de Bluefields, Corn Island, Laguna de Perlas",
     relato: "Crisol de culturas donde confluyen comunidades Creoles, Garífunas, Rama, Mestizas y Miskitus. La RACCS consolidó el derecho de autogobierno regional y la preservación de su invaluable herencia musical, gastronómica y marítima caribeña.",
     cita: "'Cultura viva, afrodescendencia y soberanía comunal en el Caribe nicaragüense.'",
-    imagen: "mapa_autonomia.jpg"
+    imagen: "RACCS.jpg"
   }
 ];

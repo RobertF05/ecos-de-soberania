@@ -46,13 +46,13 @@ export const TRAYECTOS_HISTORICOS = [
     ],
     galeriaImagenes: [
       {
-        archivo: "san_jacinto_batalla.jpg",
+        archivo: "MV_Andres.jpg",
         titulo: "Batalla de la Hacienda San Jacinto",
         descripcion: "Retrato del enfrentamiento heroico y la pedrada inmortal de Andrés Castro.",
         tipo: "san_jacinto"
       },
       {
-        archivo: "indios_flecheros.jpg",
+        archivo: "MV_Indios.jpg",
         titulo: "Indios Flecheros de Matagalpa",
         descripcion: "Vanguardia indígena que combatió decisivamente con arco y flecha por la patria.",
         tipo: "independencia"
@@ -94,13 +94,13 @@ export const TRAYECTOS_HISTORICOS = [
     ],
     galeriaImagenes: [
       {
-        archivo: "sandino_general.jpg",
+        archivo: "MV_AgustoCesar.jpeg",
         titulo: "General Augusto C. Sandino",
         descripcion: "General de Hombres Libres junto a su Estado Mayor en el Chipote.",
         tipo: "sandino"
       },
       {
-        archivo: "zeledon_coyotepe.jpg",
+        archivo: "MV_BenjaminZeledon.jpg",
         titulo: "General Benjamín Zeledón",
         descripcion: "Héroe Nacional y símbolo de dignidad en la colina de Masaya.",
         tipo: "sandino"
@@ -142,13 +142,13 @@ export const TRAYECTOS_HISTORICOS = [
     ],
     galeriaImagenes: [
       {
-        archivo: "cruzada_alfabetizacion.jpg",
+        archivo: "MV_Epa.jpg",
         titulo: "Brigadistas del EPA en la Montaña",
         descripcion: "Jóvenes estudiantes enseñando a leer a las familias campesinas.",
         tipo: "revolucion"
       },
       {
-        archivo: "carlos_fonseca.jpg",
+        archivo: "MV_CarlosFonseca.jpeg",
         titulo: "Comandante Carlos Fonseca Amador",
         descripcion: "Padre de la Revolución Popular Sandinista y forjador de conciencias.",
         tipo: "revolucion"
@@ -190,13 +190,13 @@ export const TRAYECTOS_HISTORICOS = [
     ],
     galeriaImagenes: [
       {
-        archivo: "pueblos_costa_caribe.jpg",
+        archivo: "MV_Caribe.jpg",
         titulo: "Comunidades Multiétnicas del Caribe",
         descripcion: "Celebración de la identidad comunal, danza de Palo de Mayo y asambleas territoriales.",
         tipo: "costa_caribe"
       },
       {
-        archivo: "mapa_autonomia.jpg",
+        archivo: "MV_RR.jpg",
         titulo: "Territorios Indígenas y Afrodescendientes",
         descripcion: "Mapa de la demarcación y titulación comunal en la RACCN y RACCS.",
         tipo: "costa_caribe"

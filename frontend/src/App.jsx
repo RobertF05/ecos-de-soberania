@@ -23,7 +23,7 @@ const IMAGENES_FONDO = [
 ];
 
 export function App() {
-  const [vistaActual, setVistaActual] = useState('mapa'); // 'museo' | 'mapa' | 'trivia' | 'prueba'
+  const [vistaActual, setVistaActual] = useState('museo'); // 'museo' | 'mapa' | 'trivia' | 'prueba'
   const [modalQRAbierto, setModalQRAbierto] = useState(false);
   const [indiceFondo, setIndiceFondo] = useState(0);
 

@@ -179,7 +179,7 @@ export const CompleteFrase = () => {
     setPistaUsada(true);
     setNotificacion({
       tipo: "pista",
-      texto: `💡 Pista activada: Se restarán ${COSTO_PISTA} pts del valor de esta frase.`
+      texto: `Pista activada: Se restarán ${COSTO_PISTA} pts del valor de esta frase.`
     });
   };
 
@@ -187,7 +187,7 @@ export const CompleteFrase = () => {
     setEstadoPregunta("tiempo_agotado");
     setNotificacion({
       tipo: "error",
-      texto: "⏰ ¡Se acabó el tiempo! Perdiste los puntos de esta pregunta. Saltando a la siguiente..."
+      texto: "¡Se acabó el tiempo! Perdiste los puntos de esta pregunta. Saltando a la siguiente..."
     });
 
     registrarEnHistorial("tiempo_agotado", 0, 0);
@@ -233,8 +233,8 @@ export const CompleteFrase = () => {
       setEstadoPregunta("correcto");
       setNotificacion({
         tipo: "exito",
-        texto: `✅ ¡Excelente! +${PUNTOS_BASE} pts base | ⚡ +${bonoRapidez} pts por rapidez${
-          pistaUsada ? ` | 💡 -${COSTO_PISTA} pts por pista` : ""
+        texto: `¡Excelente! +${PUNTOS_BASE} pts base | +${bonoRapidez} pts por rapidez${
+          pistaUsada ? ` | -${COSTO_PISTA} pts por pista` : ""
         } = +${puntosObtenidos} pts`
       });
       registrarEnHistorial("correcto", puntosObtenidos, bonoRapidez);
@@ -242,7 +242,7 @@ export const CompleteFrase = () => {
       setEstadoPregunta("incorrecto");
       setNotificacion({
         tipo: "error",
-        texto: `❌ Respuesta incorrecta. La palabra correcta era "${preguntaActual.respuesta}". (0 pts)`
+        texto: `Respuesta incorrecta. La palabra correcta era "${preguntaActual.respuesta}". (0 pts)`
       });
       registrarEnHistorial("incorrecto", 0, 0);
     }
@@ -273,8 +273,8 @@ export const CompleteFrase = () => {
         {/* Reglas claras a primera vista */}
         <div className="bg-slate-50/90 border border-slate-200 rounded-2xl p-5 sm:p-6 shadow-sm space-y-4">
           <div className="flex items-center justify-between border-b border-slate-200 pb-3">
-            <h3 className="text-lg sm:text-xl font-serif font-black text-sky-900 flex items-center gap-2">
-              <span>✍️</span> Complete la Frase Histórica
+            <h3 className="text-lg sm:text-xl font-serif font-black text-sky-900">
+              Complete la Frase Histórica
             </h3>
             <span className="text-[11px] font-bold uppercase tracking-wider bg-sky-50 text-sky-800 px-3 py-1 rounded-full border border-sky-200">
               Reglas de Puntuación
@@ -282,34 +282,25 @@ export const CompleteFrase = () => {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
-            <div className="bg-white p-3.5 rounded-xl border border-slate-200 flex items-start gap-2.5 shadow-sm">
-              <span className="text-lg">⚡</span>
-              <div>
-                <strong className="text-sky-900 block">Bono de Velocidad</strong>
-                <span className="text-slate-600">
-                  Ganas <strong>{PUNTOS_BASE} pts</strong> por acierto más <strong>+{MULTIPLICADOR_TIEMPO} pts</strong> por cada segundo que te sobre en el reloj.
-                </span>
-              </div>
+            <div className="bg-white p-3.5 rounded-xl border border-slate-200 shadow-sm">
+              <strong className="text-sky-900 block mb-0.5">Bono de Velocidad</strong>
+              <span className="text-slate-600">
+                Ganas <strong>{PUNTOS_BASE} pts</strong> por acierto más <strong>+{MULTIPLICADOR_TIEMPO} pts</strong> por cada segundo que te sobre en el reloj.
+              </span>
             </div>
 
-            <div className="bg-white p-3.5 rounded-xl border border-slate-200 flex items-start gap-2.5 shadow-sm">
-              <span className="text-lg">💡</span>
-              <div>
-                <strong className="text-amber-800 block">Uso de Pistas (-{COSTO_PISTA} pts)</strong>
-                <span className="text-slate-600">
-                  Puedes pedir una pista contextual por pregunta, pero restará <strong>{COSTO_PISTA} puntos</strong> si aciertas.
-                </span>
-              </div>
+            <div className="bg-white p-3.5 rounded-xl border border-slate-200 shadow-sm">
+              <strong className="text-amber-800 block mb-0.5">Uso de Pistas (-{COSTO_PISTA} pts)</strong>
+              <span className="text-slate-600">
+                Puedes pedir una pista contextual por pregunta, pero restará <strong>{COSTO_PISTA} puntos</strong> si aciertas.
+              </span>
             </div>
 
-            <div className="bg-white p-3.5 rounded-xl border border-slate-200 flex items-start gap-2.5 shadow-sm">
-              <span className="text-lg">⏰</span>
-              <div>
-                <strong className="text-red-800 block">Límite de Tiempo</strong>
-                <span className="text-slate-600">
-                  Si el reloj llega a 0s, <strong>pierdes los puntos de esa pregunta</strong> y saltarás a la siguiente.
-                </span>
-              </div>
+            <div className="bg-white p-3.5 rounded-xl border border-slate-200 shadow-sm">
+              <strong className="text-red-800 block mb-0.5">Límite de Tiempo</strong>
+              <span className="text-slate-600">
+                Si el reloj llega a 0s, <strong>pierdes los puntos de esa pregunta</strong> y saltarás a la siguiente.
+              </span>
             </div>
           </div>
         </div>
@@ -326,7 +317,7 @@ export const CompleteFrase = () => {
                 <span className="px-3 py-1 rounded-md bg-sky-50 text-sky-800 font-extrabold text-xs uppercase tracking-wider border border-sky-200">
                   Nivel 1 • Explorador
                 </span>
-                <span className="text-xs font-mono font-bold text-slate-500">⏱️ 25s por frase</span>
+                <span className="text-xs font-mono font-bold text-slate-500">25s por frase</span>
               </div>
               <h4 className="text-xl font-serif font-black text-sky-900 group-hover:text-sky-700 transition-colors">
                 Ideal para principiantes y visitantes
@@ -337,7 +328,7 @@ export const CompleteFrase = () => {
             </div>
             <div className="mt-5 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-extrabold text-sky-700">
               <span>5 frases fundamentales</span>
-              <span className="group-hover:translate-x-1 transition-transform">Comenzar Nivel Explorador ➔</span>
+              <span className="group-hover:translate-x-1 transition-transform">Comenzar Nivel Explorador →</span>
             </div>
           </button>
 
@@ -351,7 +342,7 @@ export const CompleteFrase = () => {
                 <span className="px-3 py-1 rounded-md bg-slate-800 text-white font-extrabold text-xs uppercase tracking-wider">
                   Nivel 2 • Historiador
                 </span>
-                <span className="text-xs font-mono font-bold text-slate-500">⏱️ 30s por frase</span>
+                <span className="text-xs font-mono font-bold text-slate-500">30s por frase</span>
               </div>
               <h4 className="text-xl font-serif font-black text-sky-900 group-hover:text-sky-700 transition-colors">
                 Para conocedores de la historia patria
@@ -362,7 +353,7 @@ export const CompleteFrase = () => {
             </div>
             <div className="mt-5 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-extrabold text-sky-800">
               <span>5 desafíos históricos</span>
-              <span className="group-hover:translate-x-1 transition-transform">Comenzar Nivel Historiador ➔</span>
+              <span className="group-hover:translate-x-1 transition-transform">Comenzar Nivel Historiador →</span>
             </div>
           </button>
         </div>
@@ -381,8 +372,6 @@ export const CompleteFrase = () => {
       <div className="max-w-3xl mx-auto space-y-6 animate-fade-in text-slate-700 py-2">
         <div className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 text-center shadow-sm relative overflow-hidden">
           <div className="absolute top-0 left-0 right-0 h-1.5 bg-sky-700"></div>
-
-          <div className="text-5xl mb-3">{buenDesempeno ? "🏆" : "📘"}</div>
 
           <span className={`inline-block px-3.5 py-1 rounded-full text-xs font-extrabold uppercase tracking-wider border ${
             buenDesempeno
@@ -428,20 +417,20 @@ export const CompleteFrase = () => {
                 }`}
               >
                 <div className="space-y-0.5">
-                  <div className="flex items-center gap-2 font-bold">
-                    <span>
+                  <div className="flex flex-wrap items-center gap-2 font-bold">
+                    <span className={item.estado === "correcto" ? "text-emerald-800" : "text-red-800"}>
                       {item.estado === "correcto"
-                        ? "✅ Correcto"
+                        ? "Correcto"
                         : item.estado === "tiempo_agotado"
-                        ? "⏰ Tiempo Agotado"
-                        : "❌ Incorrecto"}
+                        ? "Tiempo Agotado"
+                        : "Incorrecto"}
                     </span>
                     <span className="text-slate-700">
-                      Palabra clave: <strong className="text-sky-900 underline">{item.respuestaCorrecta}</strong>
+                      • Palabra clave: <strong className="text-sky-900 underline">{item.respuestaCorrecta}</strong>
                     </span>
                     {item.pistaUsada && (
                       <span className="text-[10px] bg-amber-100 text-amber-800 px-2 py-0.5 rounded font-bold">
-                        💡 Pista (-{COSTO_PISTA} pts)
+                        Pista (-{COSTO_PISTA} pts)
                       </span>
                     )}
                   </div>
@@ -464,13 +453,13 @@ export const CompleteFrase = () => {
               onClick={() => iniciarJuego(nivel)}
               className="px-5 py-2.5 rounded-xl bg-sky-800 hover:bg-sky-900 text-white font-extrabold text-xs sm:text-sm transition-all shadow-sm"
             >
-              🔄 Jugar de nuevo este nivel
+              Jugar de nuevo este nivel
             </button>
             <button
               onClick={() => setNivel(null)}
               className="px-5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-extrabold text-xs sm:text-sm transition-all border border-slate-200"
             >
-              🎚️ Cambiar dificultad
+              Cambiar dificultad
             </button>
           </div>
         </div>
@@ -512,14 +501,14 @@ export const CompleteFrase = () => {
                   : "bg-white text-sky-900 border-slate-200"
               }`}
             >
-              <span>⏱️ {tiempoRestante}s</span>
+              <span>Tiempo: {tiempoRestante}s</span>
               <span className="text-[10px] font-sans font-bold text-sky-700 hidden sm:inline">
                 (Bono: +{bonoActualEstimado} pts)
               </span>
             </div>
 
             <div className="bg-sky-900 text-white px-3.5 py-1 rounded-full text-xs font-mono font-black shadow-sm">
-              🏆 {puntajeTotal} pts
+              Puntaje: {puntajeTotal} pts
             </div>
           </div>
         </div>
@@ -542,14 +531,14 @@ export const CompleteFrase = () => {
         <div className="flex flex-wrap items-start justify-between gap-3 border-b border-slate-100 pb-4">
           <div>
             <span className="text-[11px] font-extrabold uppercase tracking-wider text-sky-700 block">
-              📜 {preguntaActual.contexto}
+              {preguntaActual.contexto}
             </span>
             <h4 className="text-sm font-serif font-bold text-slate-800 mt-0.5">
               — {preguntaActual.autor}
             </h4>
           </div>
 
-          {/* Botón con Icono para Solicitar Pista */}
+          {/* Único ícono SVG limpio para solicitar una pista */}
           <button
             type="button"
             onClick={solicitarPista}
@@ -561,7 +550,9 @@ export const CompleteFrase = () => {
                 : "bg-white hover:bg-amber-50 text-slate-700 hover:text-amber-800 border-slate-200 hover:border-amber-300 shadow-sm active:scale-95"
             }`}
           >
-            <span className="text-base leading-none">💡</span>
+            <svg className="w-4 h-4 text-amber-600 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+            </svg>
             <span>{pistaUsada ? `Pista usada (-${COSTO_PISTA} pts)` : `Pedir Pista (-${COSTO_PISTA} pts)`}</span>
           </button>
         </div>
@@ -589,14 +580,11 @@ export const CompleteFrase = () => {
 
         {/* Caja de Pista Desplegada */}
         {pistaUsada && (
-          <div className="p-3.5 rounded-xl bg-amber-50/90 border border-amber-200 text-xs sm:text-sm text-amber-900 flex items-start gap-2.5 animate-fade-in">
-            <span className="text-base">💡</span>
-            <div>
-              <strong className="font-extrabold block text-amber-800">
-                Pista Histórica (-{COSTO_PISTA} puntos aplicados):
-              </strong>
-              <span>{preguntaActual.pista}</span>
-            </div>
+          <div className="p-3.5 rounded-xl bg-amber-50/90 border border-amber-200 text-xs sm:text-sm text-amber-900 animate-fade-in">
+            <strong className="font-extrabold block text-amber-800 mb-0.5">
+              Pista Histórica (-{COSTO_PISTA} puntos aplicados):
+            </strong>
+            <span>{preguntaActual.pista}</span>
           </div>
         )}
 
@@ -683,7 +671,7 @@ export const CompleteFrase = () => {
                 onClick={() => avanzarSiguiente(nivel, indice)}
                 className="shrink-0 px-4 py-2 rounded-xl bg-sky-800 hover:bg-sky-900 text-white text-xs font-extrabold uppercase tracking-wider transition-all shadow-sm"
               >
-                {indice + 1 < preguntasActuales.length ? "Siguiente Frase ➔" : "Ver Puntaje Final ➔"}
+                {indice + 1 < preguntasActuales.length ? "Siguiente Frase →" : "Ver Puntaje Final →"}
               </button>
             )}
           </div>

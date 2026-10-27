@@ -288,9 +288,8 @@ export const Trivia = ({ onVolverAlMuseo }) => {
 
         <div className="flex items-center justify-between border-b border-slate-100 pb-4 pt-2">
           <span className="text-[10px] sm:text-xs font-mono font-extrabold text-sky-700 uppercase tracking-wider">
-            👤 Protagonistas: {pregunta.personaje_clave}
+            Protagonistas: {pregunta.personaje_clave}
           </span>
-          <span className="text-lg opacity-80">⚖️</span>
         </div>
 
         <div className="space-y-4">

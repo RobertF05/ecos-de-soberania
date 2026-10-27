@@ -1,11 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { TRAYECTOS_HISTORICOS } from '../data/trayectosData';
 import { ImagePlaceholder, EscudoNacionalIcon, SandinoSiluetaIcon, GuardabarrancoIcon, SacuanjocheIcon, VolcanMomotomboIcon } from '../components/NicaraguaSymbols';
 
 export const Museo = ({ onIrATrivia }) => {
   const [trayectoActivoId, setTrayectoActivoId] = useState(TRAYECTOS_HISTORICOS[0].id);
+  const [imagenModal, setImagenModal] = useState(null);
 
   const trayectoActual = TRAYECTOS_HISTORICOS.find(t => t.id === trayectoActivoId) || TRAYECTOS_HISTORICOS[0];
+
+  // Permitir cerrar el modal con la tecla Escape
+  useEffect(() => {
+    const manejarTecla = (e) => {
+      if (e.key === 'Escape') setImagenModal(null);
+    };
+    if (imagenModal) {
+      window.addEventListener('keydown', manejarTecla);
+    }
+    return () => window.removeEventListener('keydown', manejarTecla);
+  }, [imagenModal]);
 
   const renderIconoPestaña = (id) => {
     switch (id) {
@@ -54,9 +66,11 @@ export const Museo = ({ onIrATrivia }) => {
       <section className="space-y-4">
         <div className="flex items-center justify-between px-1">
           <h2 className="text-sm font-extrabold uppercase tracking-wider text-white flex items-center gap-2">
-            <span className="text-white">🧭</span> Trayectos Históricos
+            Trayectos Históricos
           </h2>
-          <span className="text-xs text-slate-500 font-medium hidden sm:inline bg-white/50 px-2 py-1 rounded backdrop-blur-sm">Selecciona un eje temático</span>
+          <span className="text-xs text-slate-500 font-medium hidden sm:inline bg-white/50 px-2 py-1 rounded backdrop-blur-sm">
+            Selecciona un eje temático
+          </span>
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
@@ -144,27 +158,36 @@ export const Museo = ({ onIrATrivia }) => {
         {/* Descripción Histórica */}
         <div className="space-y-4">
           <h3 className="text-lg font-black text-sky-900 flex items-center gap-2">
-            <span className="text-xl">📖</span> Contexto y Significado Histórico
+            Contexto y Significado Histórico
           </h3>
-          <p className="leading-relaxed text-sm sm:text-base font-sans bg-slate-50/50 p-5 rounded-2xl border border-slate-100 shadow-sm bg-sky-900 text-white">
+          <p className="leading-relaxed text-sm sm:text-base font-sans p-5 rounded-2xl border border-slate-100 shadow-sm bg-sky-900 text-white">
             {trayectoActual.descripcionLarga}
           </p>
         </div>
 
-        {/* Galería de Imágenes */}
+        {/* Galería de Imágenes (Con apertura en Modal al hacer clic) */}
         <div className="space-y-4">
           <div className="flex flex-wrap items-center justify-between gap-2">
             <h3 className="text-lg font-black text-sky-900 flex items-center gap-2">
-              <span className="text-xl text-sky-700">🖼️</span> Galería y Evidencia
+              Galería y Evidencia
             </h3>
-            <span className="text-[10px] text-slate-400 font-mono font-medium bg-white px-2.5 py-1 rounded border border-slate-100">
-              Archivos en: /public/assets/images/
+            <span className="text-[11px] text-sky-700 font-semibold bg-sky-50 px-2.5 py-1 rounded-md border border-sky-100">
+              Haz clic en cualquier imagen para ampliarla
             </span>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {trayectoActual.galeriaImagenes.map((img, idx) => (
-              <div key={idx} className="border border-slate-200 rounded-2xl p-1 bg-slate-50/50">
+              <div
+                key={idx}
+                onClick={() => setImagenModal(img)}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') setImagenModal(img);
+                }}
+                className="group relative border border-slate-200 hover:border-sky-400 rounded-2xl p-1 bg-slate-50/50 cursor-pointer transition-all duration-200 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-sky-700"
+              >
                 <ImagePlaceholder
                   src={`/assets/images/${img.archivo}`}
                   alt={img.descripcion}
@@ -173,6 +196,10 @@ export const Museo = ({ onIrATrivia }) => {
                   subtitulo={img.descripcion}
                   archivoEsperado={img.archivo}
                 />
+                {/* Etiqueta flotante para indicar que se puede ampliar */}
+                <span className="absolute top-3 right-3 px-2.5 py-1 rounded-lg bg-white/90 backdrop-blur-sm text-sky-900 text-[10px] font-extrabold uppercase tracking-wider border border-slate-200 shadow-sm opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                  Ampliar vista
+                </span>
               </div>
             ))}
           </div>
@@ -181,7 +208,7 @@ export const Museo = ({ onIrATrivia }) => {
         {/* Línea de Hitos Cronológicos */}
         <div className="space-y-4">
           <h3 className="text-lg font-black text-sky-900 flex items-center gap-2">
-            <span className="text-xl text-sky-700">⏳</span> Hitos Trascendentales
+            Hitos Trascendentales
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {trayectoActual.hitos.map((hito, idx) => (
@@ -221,6 +248,88 @@ export const Museo = ({ onIrATrivia }) => {
         </div>
 
       </section>
+
+      {/* =========================================================
+          MODAL DE IMAGEN AMPLIADA
+         ========================================================= */}
+      {imagenModal && (
+        <div
+          onClick={() => setImagenModal(null)}
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-slate-900/70 backdrop-blur-sm animate-fadeIn"
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="relative w-full max-w-3xl bg-white/95 backdrop-blur-md border border-slate-200 rounded-3xl shadow-2xl overflow-hidden max-h-[90vh] flex flex-col"
+          >
+            {/* Franja superior en azul acero */}
+            <div className="h-1.5 bg-sky-700 w-full shrink-0"></div>
+
+            {/* Cabecera del Modal con el título de la imagen seleccionada */}
+            <div className="px-6 py-4 border-b border-slate-200 flex items-start justify-between gap-4 bg-slate-50/70">
+              <div className="space-y-1">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="px-2.5 py-0.5 rounded-md bg-sky-800 text-white text-[10px] font-bold uppercase tracking-wider">
+                    Trayecto {trayectoActual.numero}
+                  </span>
+                  <span className="px-2.5 py-0.5 rounded-md bg-sky-50 text-sky-800 border border-sky-100 text-[10px] font-mono font-bold">
+                    {trayectoActual.periodo}
+                  </span>
+                </div>
+                <h3 className="text-lg sm:text-xl font-serif font-black text-sky-900">
+                  {imagenModal.titulo}
+                </h3>
+                <p className="text-xs text-slate-500 font-medium">
+                  {imagenModal.descripcion}
+                </p>
+              </div>
+
+              <button
+                type="button"
+                onClick={() => setImagenModal(null)}
+                aria-label="Cerrar modal"
+                className="shrink-0 w-8 h-8 rounded-full bg-white hover:bg-slate-100 text-slate-500 hover:text-sky-900 border border-slate-200 flex items-center justify-center font-bold text-sm transition-colors shadow-sm"
+              >
+                ✕
+              </button>
+            </div>
+
+            {/* Cuerpo del Modal (Imagen + Explicación directa un poco más grande) */}
+            <div className="p-6 overflow-y-auto space-y-5">
+              {/* Vista ampliada de la imagen */}
+              <div className="rounded-2xl overflow-hidden border border-slate-200 bg-slate-100/60">
+                <ImagePlaceholder
+                  src={`/assets/images/${imagenModal.archivo}`}
+                  alt={imagenModal.descripcion}
+                  tipo={imagenModal.tipo}
+                  titulo={imagenModal.titulo}
+                  subtitulo={imagenModal.descripcion}
+                  archivoEsperado={imagenModal.archivo}
+                  className="h-64 sm:h-96"
+                />
+              </div>
+
+              {/* Explicación sin título, con letra ligeramente más grande */}
+              <div className="bg-slate-50 p-5 rounded-2xl border border-slate-200">
+                <p className="text-sm sm:text-base text-slate-700 leading-relaxed font-sans font-medium">
+                  {trayectoActual.descripcionLarga}
+                </p>
+              </div>
+            </div>
+
+            {/* Pie del Modal sin texto de archivo en la esquina inferior izquierda */}
+            <div className="px-6 py-3.5 bg-slate-50 border-t border-slate-200 flex items-center justify-end">
+              <button
+                type="button"
+                onClick={() => setImagenModal(null)}
+                className="px-5 py-2 rounded-xl bg-sky-800 hover:bg-sky-900 text-white text-xs font-extrabold uppercase tracking-wider transition-colors shadow-sm"
+              >
+                Cerrar Vista
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 };

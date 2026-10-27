@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { createPortal } from 'react-dom';
 import { DEPARTAMENTOS_DATA } from '../data/departamentosData';
 import { ImagePlaceholder } from '../components/NicaraguaSymbols';
 
@@ -10,6 +11,24 @@ export const MapaInteractivo = () => {
 
   const [deptoSeleccionadoId, setDeptoSeleccionadoId] = useState(listaDeptos[0]?.id || '');
   const [filtroRegion, setFiltroRegion] = useState('Todas');
+  const [mostrarImagenGrande, setMostrarImagenGrande] = useState(false);
+  const [posicionImagen, setPosicionImagen] = useState({ x: 0, y: 0 });
+
+  // La imagen ampliada se coloca sobre la miniatura, no en el centro de la pantalla.
+  // Se ajusta ligeramente la posición si es necesario para evitar que salga del viewport.
+  const ampliarDesdeLaMiniatura = (evento) => {
+    const rect = evento.currentTarget.getBoundingClientRect();
+    const margen = 16;
+    const anchoMaximo = Math.min(440, window.innerWidth - margen * 2);
+    const altoMaximo = Math.min(320, window.innerHeight * 0.52) + 48;
+    const limitar = (valor, minimo, maximo) => Math.max(minimo, Math.min(valor, maximo));
+
+    setPosicionImagen({
+      x: limitar(rect.left + rect.width / 2, margen + anchoMaximo / 2, window.innerWidth - margen - anchoMaximo / 2),
+      y: limitar(rect.top + rect.height / 2, margen + altoMaximo / 2, window.innerHeight - margen - altoMaximo / 2),
+    });
+    setMostrarImagenGrande(true);
+  };
 
   if (listaDeptos.length === 0) {
     return (
@@ -20,6 +39,10 @@ export const MapaInteractivo = () => {
   }
 
   const deptoActivo = listaDeptos.find(d => d.id === deptoSeleccionadoId) || listaDeptos[0];
+  // En aplicaciones React/Vite, los archivos dentro de /public se acceden desde /.
+  const rutaImagen = deptoActivo?.imagen
+    ? `/assets/images/Mapa/${deptoActivo.imagen}`
+    : '';
 
   const deptosFiltrados = filtroRegion === 'Todas' 
     ? listaDeptos 
@@ -91,8 +114,7 @@ export const MapaInteractivo = () => {
         <div className="lg:col-span-7 bg-white/80 backdrop-blur-md border border-slate-200 rounded-3xl p-5 sm:p-6 shadow-sm relative overflow-hidden">
           
           <div className="flex items-center justify-between mb-4 mt-2">
-            <h2 className="text-base font-extrabold text-sky-900 flex items-center gap-2">
-              <span className="text-sky-700">📍</span> Mapa Interactivo
+            <h2 className="text-base font-extrabold text-sky-900 flex items-center gap-2">Mapa Interactivo
             </h2>
             <span className="text-[11px] text-sky-700 bg-sky-50 px-2.5 py-1 rounded-md font-bold border border-sky-100">
               Toca un punto o nombre
@@ -125,7 +147,7 @@ export const MapaInteractivo = () => {
                   title={`${d.nombre} (${d.cabecera})`}
                   style={{ left: `${d.x}%`, top: `${d.y}%` }}
                   className={`absolute -translate-x-1/2 -translate-y-1/2 transition-all duration-300 z-20 group focus:outline-none ${
-                    !coincideFiltro ? 'opacity-30 scale-75' : 'opacity-100'
+                    !coincideFiltro ? "opacity-30 scale-75" : "opacity-100"
                   }`}
                 >
                   <span className="relative flex items-center justify-center">
@@ -135,21 +157,25 @@ export const MapaInteractivo = () => {
                     )}
 
                     {/* Pin del departamento */}
-                    <span className={`w-5 h-5 sm:w-6 sm:h-6 rounded-full flex items-center justify-center text-[10px] font-black shadow-md transition-transform ${
-                      esActivo
-                        ? 'bg-sky-700 text-white ring-4 ring-sky-200 scale-125 z-30'
-                        : 'bg-white text-slate-400 ring-2 ring-slate-200 hover:scale-110 hover:bg-sky-50 hover:text-sky-700'
-                    }`}>
+                    <span
+                      className={`w-5 h-5 sm:w-6 sm:h-6 rounded-full flex items-center justify-center text-[10px] font-black shadow-md transition-transform ${
+                        esActivo
+                          ? "bg-sky-700 text-white ring-4 ring-sky-200 scale-125 z-30"
+                          : "bg-white text-slate-400 ring-2 ring-slate-200 hover:scale-110 hover:bg-sky-50 hover:text-sky-700"
+                      }`}
+                    >
                       ★
                     </span>
                   </span>
 
                   {/* Etiqueta flotante */}
-                  <span className={`absolute top-full left-1/2 -translate-x-1/2 mt-1 px-2 py-0.5 rounded text-[10px] font-bold whitespace-nowrap shadow-sm pointer-events-none transition-all ${
-                    esActivo
-                      ? 'bg-sky-900 text-white opacity-100 scale-105 z-30 font-black'
-                      : 'bg-white/90 text-slate-600 opacity-0 group-hover:opacity-100 border border-slate-200'
-                  }`}>
+                  <span
+                    className={`absolute top-full left-1/2 -translate-x-1/2 mt-1 px-2 py-0.5 rounded text-[10px] font-bold whitespace-nowrap shadow-sm pointer-events-none transition-all ${
+                      esActivo
+                        ? "bg-sky-900 text-white opacity-100 scale-105 z-30 font-black"
+                        : "bg-white/90 text-slate-600 opacity-0 group-hover:opacity-100 border border-slate-200"
+                    }`}
+                  >
                     {d.nombre}
                   </span>
                 </button>
@@ -205,7 +231,7 @@ export const MapaInteractivo = () => {
           {/* Hito Histórico Principal */}
           <div className="bg-slate-50/80 p-4 rounded-xl border-l-4 border-sky-700 shadow-sm space-y-1.5">
             <div className="flex items-center justify-between text-[10px] font-black text-sky-800 uppercase tracking-wider">
-              <span>⚔️ Hito de Soberanía</span>
+              <span> Hito de Soberanía</span>
               <span className="bg-white border border-slate-200 px-2 py-0.5 rounded text-slate-600 font-mono">{deptoActivo?.año}</span>
             </div>
             <h3 className="text-sm sm:text-base font-extrabold text-slate-800 leading-snug">
@@ -216,19 +242,18 @@ export const MapaInteractivo = () => {
           {/* Personajes y Sitio Emblemático */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
             <div className="bg-white p-3 rounded-xl border border-slate-200 shadow-sm">
-              <span className="text-sky-700 font-bold block mb-0.5 text-[11px] uppercase">👤 Protagonistas:</span>
+              <span className="text-sky-700 font-bold block mb-0.5 text-[11px] uppercase">Protagonistas:</span>
               <p className="text-slate-700 font-medium">{deptoActivo?.personajes}</p>
             </div>
             <div className="bg-white p-3 rounded-xl border border-slate-200 shadow-sm">
-              <span className="text-sky-700 font-bold block mb-0.5 text-[11px] uppercase">🏛️ Sitio:</span>
+              <span className="text-sky-700 font-bold block mb-0.5 text-[11px] uppercase">Sitio:</span>
               <p className="text-slate-700 font-medium">{deptoActivo?.sitioEmblematico}</p>
             </div>
           </div>
 
           {/* Relato Histórico */}
           <div className="bg-slate-50/50 p-4 rounded-xl border border-slate-100 space-y-2">
-            <h4 className="text-[11px] font-extrabold text-sky-900 uppercase tracking-wider flex items-center gap-1.5">
-              <span className="text-base text-sky-700">📖</span> Memoria y Significado:
+            <h4 className="text-[11px] font-extrabold text-sky-900 uppercase tracking-wider flex items-center gap-1.5">Memoria y Significado:
             </h4>
             <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-sans font-medium">
               {deptoActivo?.relato}
@@ -245,14 +270,19 @@ export const MapaInteractivo = () => {
           {/* Espacio para Imagen del Departamento */}
           <div className="pt-2 border-t border-slate-100">
             <h4 className="text-xs font-bold text-sky-900 mb-2 flex items-center justify-between">
-              <span className="flex items-center gap-1.5">
-                <span className="text-sky-700">🖼️</span> Registro Gráfico
+              <span className="flex items-center gap-1.5">Registro Gráfico
               </span>
               <span className="text-[9px] font-mono text-slate-400 font-normal">/assets/images/</span>
             </h4>
-            <div className="border border-slate-200 rounded-xl p-1 bg-slate-50/50">
+            {/* La imagen pequeña conserva el diseño original. */}
+            <div
+              className="relative cursor-zoom-in rounded-xl border border-slate-200 bg-slate-50/50 p-1"
+              onMouseEnter={ampliarDesdeLaMiniatura}
+              onMouseLeave={() => setMostrarImagenGrande(false)}
+              title="Pasa el cursor para ampliar la fotografía"
+            >
               <ImagePlaceholder
-                src={`/assets/images/${deptoActivo?.imagen}`}
+                src={rutaImagen}
                 alt={`Fotografía histórica de ${deptoActivo?.nombre}`}
                 tipo={tipoImagen}
                 titulo={`Registro Histórico: ${deptoActivo?.nombre}`}
@@ -267,6 +297,39 @@ export const MapaInteractivo = () => {
 
       </div>
 
+      {/*
+        Vista ampliada junto a la miniatura, sin oscurecer el resto de la página.
+        Se mantiene montada para que tanto la entrada como la salida tengan animación.
+        El portal evita que los paneles con overflow-hidden recorten la ampliación.
+      */}
+      {rutaImagen && typeof document !== 'undefined' && createPortal(
+        <div
+          className="pointer-events-none fixed z-[9999]"
+          style={{
+            left: posicionImagen.x,
+            top: posicionImagen.y,
+            transform: 'translate(-50%, -50%)',
+            visibility: !mostrarImagenGrande && posicionImagen.x === 0 ? 'hidden' : 'visible',
+          }}
+          aria-hidden="true"
+        >
+          <div
+            className={`w-fit max-w-[calc(100vw-32px)] rounded-2xl border border-slate-200 bg-white p-2 shadow-2xl transition-[opacity,transform] duration-300 ease-out motion-reduce:transition-none sm:max-w-[440px] ${
+              mostrarImagenGrande ? 'scale-100 opacity-100' : 'scale-75 opacity-0'
+            }`}
+          >
+            <img
+              src={rutaImagen}
+              alt={`Fotografía ampliada de ${deptoActivo?.nombre}`}
+              className="block h-auto max-h-[min(52vh,320px)] w-auto max-w-full rounded-xl object-contain"
+            />
+            <p className="px-2 pt-2 text-center text-xs font-semibold text-slate-700">
+              {deptoActivo?.nombre}
+            </p>
+          </div>
+        </div>,
+        document.body
+      )}
     </div>
   );
 };
