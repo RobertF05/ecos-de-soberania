@@ -7,9 +7,9 @@ export const Navbar = ({ vistaActual, setVistaActual, abrirModalQR, ipInfo }) =>
   const enlaces = [
     { id: 'museo', label: 'MUSEO VIRTUAL', labelCorto: 'MUSEO' },
     { id: 'mapa', label: 'MAPA INTERACTIVO', labelCorto: 'MAPA' },
-    { id: 'video1', label: 'VIDEO I: SAN JACINTO', labelCorto: 'VIDEO I' },
-    { id: 'video2', label: 'VIDEO II: SOBERANÍA', labelCorto: 'VIDEO II' },
-    { id: 'trivia', label: 'LÍNEA DE DECISIONES', labelCorto: 'DECISIONES' },
+    { id: 'video1', label: 'VIDEO: SAN JACINTO', labelCorto: 'VIDEO I' },
+    // { id: 'video2', label: 'VIDEO II: SOBERANÍA', labelCorto: 'VIDEO II' },
+    // { id: 'trivia', label: 'LÍNEA DE DECISIONES', labelCorto: 'DECISIONES' },
     { id: 'prueba', label: 'PRUEBA TUS CONOCIMIENTOS', labelCorto: 'PRUEBA' }
   ];
 
