@@ -5,6 +5,8 @@ import { Museo } from './views/Museo';
 import { Trivia } from './views/Trivia';
 import { MapaInteractivo } from './views/MapaInteractivo';
 import { PruebaConocimientos } from './views/PruebaConocimientos';
+import { VideoHistorico } from './views/VideoHistorico';
+import { VIDEOS_DATA } from './data/videoData';
 import {
   EscudoNacionalIcon,
   GuardabarrancoIcon,
@@ -12,7 +14,6 @@ import {
   SandinoSiluetaIcon,
   BanderaNicaraguaBadge
 } from './components/NicaraguaSymbols';
-
 
 // 1. Lista de imágenes de fondo (ajústalas a las rutas reales en tu carpeta public/assets)
 const IMAGENES_FONDO = [
@@ -23,7 +24,7 @@ const IMAGENES_FONDO = [
 ];
 
 export function App() {
-  const [vistaActual, setVistaActual] = useState('museo'); // 'museo' | 'mapa' | 'trivia' | 'prueba'
+  const [vistaActual, setVistaActual] = useState('museo'); // 'museo' | 'mapa' | 'video1' | 'video2' | 'trivia' | 'prueba'
   const [modalQRAbierto, setModalQRAbierto] = useState(false);
   const [indiceFondo, setIndiceFondo] = useState(0);
 
@@ -171,6 +172,14 @@ export function App() {
             <MapaInteractivo />
           )}
 
+          {vistaActual === 'video1' && (
+            <VideoHistorico videoData={VIDEOS_DATA.video1} mostrarSelector={false} />
+          )}
+
+          {vistaActual === 'video2' && (
+            <VideoHistorico videoData={VIDEOS_DATA.video2} mostrarSelector={false} />
+          )}
+
           {vistaActual === 'trivia' && (
             <Trivia onVolverAlMuseo={() => setVistaActual('museo')} />
           )}
@@ -187,8 +196,7 @@ export function App() {
           ipInfo={ipInfo}
         />
 
-        {/* Pie de Página Patriótico con la Franja Bandera de Nicaragua */}
-{/* Pie de Página Institucional sincronizado con el diseño del Navbar */}
+        {/* Pie de Página Institucional sincronizado con el diseño del Navbar */}
         <footer className="mt-auto bg-white border-t-2 border-[#0067C6] shadow-sm text-center font-sans text-slate-900 relative">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-5 space-y-2.5">
             

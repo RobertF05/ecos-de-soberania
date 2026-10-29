@@ -7,6 +7,8 @@ export const Navbar = ({ vistaActual, setVistaActual, abrirModalQR, ipInfo }) =>
   const enlaces = [
     { id: 'museo', label: 'MUSEO VIRTUAL', labelCorto: 'MUSEO' },
     { id: 'mapa', label: 'MAPA INTERACTIVO', labelCorto: 'MAPA' },
+    { id: 'video1', label: 'VIDEO I: SAN JACINTO', labelCorto: 'VIDEO I' },
+    { id: 'video2', label: 'VIDEO II: SOBERANÍA', labelCorto: 'VIDEO II' },
     { id: 'trivia', label: 'LÍNEA DE DECISIONES', labelCorto: 'DECISIONES' },
     { id: 'prueba', label: 'PRUEBA TUS CONOCIMIENTOS', labelCorto: 'PRUEBA' }
   ];
@@ -47,18 +49,17 @@ export const Navbar = ({ vistaActual, setVistaActual, abrirModalQR, ipInfo }) =>
           </div>
 
           {/* Menú de Navegación Desktop */}
-{/* El nav ocupa todo el espacio restante (flex-1) */}
           <nav className="hidden lg:flex flex-1 items-center">
             
             {/* Contenedor de enlaces centrado con mx-auto */}
-            <div className="mx-auto flex items-center gap-4 xl:gap-6">
+            <div className="mx-auto flex items-center gap-3 xl:gap-5">
               {enlaces.map((item) => {
                 const activo = vistaActual === item.id;
                 return (
                   <button
                     key={item.id}
                     onClick={() => seleccionarVista(item.id)}
-                    className={`relative py-1.5 text-[11px] xl:text-[10px] font-extrabold uppercase tracking-wider transition-colors duration-200 ${
+                    className={`relative py-1.5 text-[11px] xl:text-[10px] font-extrabold uppercase tracking-wider whitespace-nowrap transition-colors duration-200 ${
                       activo
                         ? 'text-[#0067C6]'
                         : 'text-slate-800 hover:text-[#0067C6]'
@@ -91,7 +92,6 @@ export const Navbar = ({ vistaActual, setVistaActual, abrirModalQR, ipInfo }) =>
                 <path d="M3 3h8v8H3V3zm2 2v4h4V5H5zm8-2h8v8h-8V3zm2 2v4h4V5h-4zM3 13h8v8H3v-8zm2 2v4h4v-4H5zm13-2h3v2h-3v-2zm-3 0h2v3h-2v-3zm3 3h3v2h-3v-2zm-3 3h2v2h-2v-2zm3 0h3v2h-3v-2z" />
               </svg>
               <span>QR LAN</span>
-
             </button>
           </nav>
 
