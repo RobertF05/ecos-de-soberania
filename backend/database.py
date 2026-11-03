@@ -2,7 +2,14 @@ import sqlite3
 import os
 from datetime import datetime
 
-DB_PATH = os.path.join(os.path.dirname(__file__), "data", "ecos_soberania.db")
+DB_PATH = os.environ.get(
+    "DB_PATH",
+    os.path.join(
+        os.path.dirname(__file__),
+        "data",
+        "ecos_soberania.db"
+    )
+)
 
 def get_connection():
     os.makedirs(os.path.dirname(DB_PATH), exist_ok=True)

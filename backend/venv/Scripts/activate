@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="C:\Users\aleja\.gemini\antigravity\scratch\ecos-de-soberania\backend\venv"
+VIRTUAL_ENV="C:\Users\rfuen\OneDrive\Documentos\ecos-de-soberania\backend\venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

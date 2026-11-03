@@ -8,7 +8,7 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-set VIRTUAL_ENV=C:\Users\aleja\.gemini\antigravity\scratch\ecos-de-soberania\backend\venv
+set VIRTUAL_ENV=C:\Users\rfuen\OneDrive\Documentos\ecos-de-soberania\backend\venv
 
 if not defined PROMPT set PROMPT=$P$G
 
