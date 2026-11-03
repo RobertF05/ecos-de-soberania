@@ -7,7 +7,7 @@ export const Navbar = ({ vistaActual, setVistaActual, abrirModalQR, ipInfo }) =>
   const enlaces = [
     { id: 'museo', label: 'MUSEO VIRTUAL', labelCorto: 'MUSEO' },
     { id: 'mapa', label: 'MAPA INTERACTIVO', labelCorto: 'MAPA' },
-    { id: 'video1', label: 'VIDEO: SAN JACINTO', labelCorto: 'VIDEO I' },
+    { id: 'video1', label: 'VIDEO SAN JACINTO', labelCorto: 'VIDEO I' },
     // { id: 'video2', label: 'VIDEO II: SOBERANÍA', labelCorto: 'VIDEO II' },
     // { id: 'trivia', label: 'LÍNEA DE DECISIONES', labelCorto: 'DECISIONES' },
     { id: 'prueba', label: 'PRUEBA TUS CONOCIMIENTOS', labelCorto: 'PRUEBA' }
@@ -76,38 +76,10 @@ export const Navbar = ({ vistaActual, setVistaActual, abrirModalQR, ipInfo }) =>
                 );
               })}
             </div>
-
-            {/* Botón QR LAN empujado a la derecha */}
-            <button
-              onClick={abrirModalQR}
-              title="Escanear para abrir en tu celular (Red Local Offline)"
-              className="shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-[#0067C6]/30 bg-slate-50 hover:bg-[#0067C6] text-[#0067C6] hover:text-white font-extrabold text-[11px] uppercase tracking-wider transition-all duration-200 group shadow-sm"
-            >
-              {/* SVG Estático de Código QR */}
-              <svg 
-                className="w-4 h-4 text-[#0067C6] group-hover:text-white transition-colors shrink-0" 
-                viewBox="0 0 24 24" 
-                fill="currentColor"
-              >
-                <path d="M3 3h8v8H3V3zm2 2v4h4V5H5zm8-2h8v8h-8V3zm2 2v4h4V5h-4zM3 13h8v8H3v-8zm2 2v4h4v-4H5zm13-2h3v2h-3v-2zm-3 0h2v3h-2v-3zm3 3h3v2h-3v-2zm-3 3h2v2h-2v-2zm3 0h3v2h-3v-2z" />
-              </svg>
-              <span>QR LAN</span>
-            </button>
           </nav>
 
-          {/* Controles Móviles (Botón QR compacto + Botón Hamburguesa) */}
+          {/* Controles Móviles (Botón Hamburguesa) */}
           <div className="flex items-center gap-1.5 lg:hidden">
-            <button
-              onClick={abrirModalQR}
-              className="flex items-center gap-1 px-2.5 py-1.5 rounded-full bg-slate-100 hover:bg-[#0067C6] text-[#0067C6] hover:text-white font-extrabold text-[11px] border border-slate-200 transition-colors"
-              title="Conectar por QR"
-            >
-              <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M3 3h8v8H3V3zm2 2v4h4V5H5zm8-2h8v8h-8V3zm2 2v4h4V5h-4zM3 13h8v8H3v-8zm2 2v4h4v-4H5zm13-2h3v2h-3v-2zm-3 0h2v3h-2v-3zm3 3h3v2h-3v-2zm-3 3h2v2h-2v-2zm3 0h3v2h-3v-2z" />
-              </svg>
-              <span>QR</span>
-            </button>
-
             <button
               onClick={() => setMenuAbierto(!menuAbierto)}
               aria-label="Abrir menú de navegación"
@@ -148,11 +120,6 @@ export const Navbar = ({ vistaActual, setVistaActual, abrirModalQR, ipInfo }) =>
               </button>
             );
           })}
-
-          <div className="pt-2 mt-1 border-t border-slate-100 flex items-center justify-between px-3.5 text-[10px] text-slate-500 font-mono">
-            <span>Red Local Activa:</span>
-            <strong className="text-[#0067C6]">{ipInfo?.ip_local || '127.0.0.1'}</strong>
-          </div>
         </div>
       )}
     </header>
